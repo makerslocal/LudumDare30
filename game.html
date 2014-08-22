@@ -11,8 +11,9 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
 
+		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+		<!--
 			var camera = undefined;
 
 			var world = new World();
@@ -92,23 +93,26 @@
 				{
 					return;
 				}
-
+				
+				// Remove old player object
 				player.World.Entities.Grid.Remove(player);
-				player.X += x;
-				player.Y += y;
+				player.X += x; // Update player obj coords
+				player.Y += y; // ditto ^
+				// Create new player obj in updated location
 				player.World.Entities.Grid.Add(player);
 
 				if(!camera)
 				{
-					return;
+					return; // No camera, can't render
 				}
 
-				camera.X += x;
-				camera.Y += y;
+				camera.X += x; // Adjust center of screen to track player
+				camera.Y += y; // ditto ^
 
 				camera.Render(world);
 			});
 
+		//-->
 		</SCRIPT>
 		<TITLE>I Wanna Be The Game: The Movie: The Game: The Game</TITLE>
 	</HEAD>
