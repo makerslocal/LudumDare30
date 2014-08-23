@@ -1,3 +1,7 @@
+/*
+ * Grid.js
+ */
+
 function Grid()
 {
 	var grid = 4;
@@ -10,13 +14,16 @@ function Grid()
 		{
 			return;
 		}
-
+		
+		// Move entity.X by 4 bits?
 		var x = entity.X >> grid;
 		var y = entity.Y >> grid;
-
+		
+		// Move by 4 bits
 		var xx = (entity.X + entity.Width  - 1) >> grid;
 		var yy = (entity.Y + entity.Height - 1) >> grid;
 
+		// The hell?
 		for(var xxx = x; xxx <= xx; xxx++)
 		{
 			if(!entities[xxx])
