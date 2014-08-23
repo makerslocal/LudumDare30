@@ -130,3 +130,17 @@ div.wood
 {
 	background-color: #960;
 }
+
+div#debug {
+	position:absolute;
+	z-index:1337;
+	top:0px; left:0px;
+}
+div#qr {
+	background-color:white;
+	border:16px solid white;
+	width:255px;
+	height:255px;	
+	display:none;
+}
+
