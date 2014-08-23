@@ -2,20 +2,22 @@
  * Grid.js
  */
 
+// The Grid object
 function Grid()
 {
-	var grid = 4;
+	var grid = 4; // Bits to shift x/y coord values by
 
-	var entities = new Object();
+	var entities = new Object(); // Not sure what this is
 
+	// Grid.Add()
 	this.Add = function(entity)
 	{
 		if(!entity)
 		{
-			return;
+			return; // No entity to add
 		}
 		
-		// Move entity.X by 4 bits?
+		// Move entity.X by 4 bits? Which is like dividing it by 2, 4 times?
 		var x = entity.X >> grid;
 		var y = entity.Y >> grid;
 		

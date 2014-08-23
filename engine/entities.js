@@ -1,3 +1,7 @@
+/*
+ * entities.js
+ */
+
 function Entities(world)
 {
 	var entities = new Array();
