@@ -1,0 +1,103 @@
+<HTML>
+	<HEAD>
+		<LINK HREF="style.css" REL="stylesheet" TYPE="text/css" />
+		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.player.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.tree.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+
+			var camera = undefined;
+
+			var world = new World();
+
+			var player = new Player();
+
+			player.X = 64;
+			player.Y = 32;
+
+			world.Entities.Add(player);
+
+			for(var i = 0; i < 256; i++)
+			{
+				var tree = new Tree();
+
+				tree.X = (Math.floor(Math.random() * 128) - 64) << 4;
+				tree.Y = (Math.floor(Math.random() * 128) - 64) << 4;
+
+				world.Entities.Add(tree);
+			}
+
+			document.onkeydown = function(event)
+			{
+				var x = 0;
+				var y = 0;
+
+				switch(event.keyCode)
+				{
+					case 37:  // Left
+					case 100: // Left (num)
+						x = -16;
+						break;
+
+					case 38:  // Up
+					case 104: // Up (num)
+						y = -16;
+						break;
+
+					case 39:  // Right
+					case 102: // Right (num)
+						x = 16;
+						break;
+
+					case 40: // Down
+					case 98: // Down (num)
+						y = 16;
+						break;
+				}
+
+				if(player.Scan(x, y))
+				{
+					return;
+				}
+
+				player.World.Entities.Grid.Remove(player);
+				player.X += x;
+				player.Y += y;
+				player.World.Entities.Grid.Add(player);
+
+				if(!camera)
+				{
+					return;
+				}
+
+				camera.X += x;
+				camera.Y += y;
+
+				camera.Render(world);
+			}
+
+			window.onload = function()
+			{
+				var element = document.getElementById('camera');
+
+				if(!element)
+				{
+					return;
+				}
+
+				camera = new Camera(element);
+
+				camera.Render(world);
+			}
+
+		</SCRIPT>
+		<TITLE>The Game</TITLE>
+	</HEAD>
+	<BODY>
+		<DIV ID="camera"></DIV>
+	</BODY>
+</HTML>

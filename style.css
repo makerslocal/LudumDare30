@@ -1,0 +1,37 @@
+*
+{
+	margin: 0;
+	padding: 0;	
+}
+
+body
+{
+	background-color: black;
+	overflow: hidden;
+}
+
+div
+{
+	height: 16px;
+	position: absolute;
+	width: 16px;
+}
+
+div#camera
+{
+	background-color: white;
+	height: 720px;
+	overflow: hidden;
+	position: static;
+	width: 1280px;
+}
+
+div.player
+{
+	background-color: red;
+}
+
+div.tree
+{
+	background-color: green;
+}
