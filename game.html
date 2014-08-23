@@ -65,21 +65,23 @@
 				{
 					return; // Something collides, don't move anything
 				}
-
+				
+				// Remove old player object
 				player.World.Entities.Grid.Remove(player);
-				player.X += x;
-				player.Y += y;
+				player.X += x; // Update player obj coords
+				player.Y += y; // ditto ^
+				// Create new player obj in updated location
 				player.World.Entities.Grid.Add(player);
 
 				if(!camera)
 				{
-					return;
+					return; // No camera, can't render
 				}
 
-				camera.X += x;
-				camera.Y += y;
+				camera.X += x; // Adjust center of screen to track player
+				camera.Y += y; // ditto ^
 
-				camera.Render(world);
+				camera.Render(world); // Render the updated world
 			}
 
 			window.onload = function()
@@ -88,16 +90,19 @@
 
 				if(!element)
 				{
-					return;
+					return; // Something's wrong with the html, our tag is missing
 				}
 
+				// Create new camera object
 				camera = new Camera(element);
-
+				
+				// Render initial world
 				camera.Render(world);
 			}
 
 		//-->
 		</SCRIPT>
+		
 		<TITLE>The Game</TITLE>
 	</HEAD>
 	<BODY>
