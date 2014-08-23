@@ -68,7 +68,6 @@
 
 			window.onload = function()
 			{
-				var buttons = new Array('down', 'left', 'right', 'up');
 
 				document.getElementById("btn-export").onclick = function(e) {
 					//alert(world.Entities.Export(128,128,-64,-64));
@@ -79,6 +78,7 @@
 					
 				var element = document.getElementById('camera');
 
+				var buttons = new Array('down', 'left', 'right', 'up');
 				for(var i in buttons)
 				{
 					var element = document.getElementById('overlay_dpad_' + buttons[i]);
