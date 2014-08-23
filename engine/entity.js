@@ -1,10 +1,17 @@
+/*
+ * Entity.js
+ */
+
 function Entity()
 {
+	// I suspect this is the pixel dim of our character
 	this.Height = 16;
 	this.Width = 16;
-
+	
+	// Not sure what's going on here.
 	this.World = undefined;
 
+	// Initialize character's x/y
 	this.X = 0;
 	this.Y = 0;
 
@@ -12,7 +19,7 @@ function Entity()
 	{
 		if(!entity)
 		{
-			return false;
+			return false; // No entity = no touching?
 		}
 
 		if(this.X + this.Width < entity.X)
@@ -34,7 +41,7 @@ function Entity()
 		{
 			return false;
 		}
-
+		// Conditions for non-collision didn't pass.
 		return true;
 	};
 
