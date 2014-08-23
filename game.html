@@ -1,6 +1,7 @@
 <HTML>
 	<HEAD>
 		<LINK HREF="style.css" REL="stylesheet" TYPE="text/css" />
+		<SCRIPT LANGUAGE="javascript" SRC="engine/engine.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.player.js" TYPE="text/javascript"></SCRIPT>
@@ -8,6 +9,7 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
 
 			var camera = undefined;
@@ -33,30 +35,56 @@
 
 			document.onkeydown = function(event)
 			{
+				Controls.OnKeyDown(event);
+			};
+
+			document.onkeyup = function(event)
+			{
+				Controls.OnKeyUp(event);
+			};
+
+			window.onload = function()
+			{
+				var element = document.getElementById('camera');
+
+				if(!element)
+				{
+					return;
+				}
+
+				camera = new Camera(element);
+
+				camera.Render(world);
+			};
+
+			Engine.AddListener(function()
+			{
+				camera.Render(world);
+			});
+
+			Engine.AddListener(function()
+			{
 				var x = 0;
 				var y = 0;
 
-				switch(event.keyCode)
+				if(Controls.Directions['left'])
 				{
-					case 37:  // Left
-					case 100: // Left (num)
-						x = -16;
-						break;
+					x -= player.Width;
+				}
 
-					case 38:  // Up
-					case 104: // Up (num)
-						y = -16;
-						break;
+				if(Controls.Directions['right'])
+				{
+					x += player.Width;
+				}
 
-					case 39:  // Right
-					case 102: // Right (num)
-						x = 16;
-						break;
+				if(Controls.Directions['up'])
+				{
+					y -= player.Height;
+				}
 
-					case 40: // Down
-					case 98: // Down (num)
-						y = 16;
-						break;
+				if(Controls.Directions['down'])
+				{
+					y += player.Height;
 				}
 
 				if(player.Scan(x, y))
@@ -78,21 +106,7 @@
 				camera.Y += y;
 
 				camera.Render(world);
-			}
-
-			window.onload = function()
-			{
-				var element = document.getElementById('camera');
-
-				if(!element)
-				{
-					return;
-				}
-
-				camera = new Camera(element);
-
-				camera.Render(world);
-			}
+			});
 
 		</SCRIPT>
 		<TITLE>The Game</TITLE>
