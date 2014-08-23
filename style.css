@@ -6,12 +6,13 @@
 
 body
 {
-	background-color: black;
+	background-color: #9FE30E;
 	overflow: hidden;
 }
 
 div
 {
+	background-repeat: no-repeat;
 	height: 16px;
 	position: absolute;
 	width: 16px;
@@ -19,11 +20,81 @@ div
 
 div#camera
 {
-	background-color: white;
 	height: 720px;
 	overflow: hidden;
 	position: static;
 	width: 1280px;
+	z-index: 0;
+}
+
+div#menu
+{
+	background-color: #FF9999;
+	height: 100px;
+	width: 400px;
+	z-index: 10;
+	position: absolute;
+	visibility: hidden;
+	
+}
+
+div#overlay
+{
+	bottom: 64px;
+	left: 64px;
+	position: absolute;
+	z-index: 1;
+}
+
+div#overlay div.button
+{
+	background-color: white;
+	height: 20%;
+	opacity: 0.5;
+	position: absolute;
+	width: 20%;
+}
+
+div#overlay div.button:active
+{
+	opacity: 0.75;
+}
+
+div#overlay div#overlay_dpad
+{
+	bottom: 0;
+	height: 256px;
+	left: 0;
+	position: absolute;
+	width: 256px;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_down
+{
+	bottom: 0;
+	height: 40%;
+	left: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_left
+{
+	left: 0;
+	top: 40%;
+	width: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_right
+{
+	right: 0;
+	top: 40%;
+	width: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_up
+{
+	height: 40%;
+	left: 40%;
+	top: 0;
 }
 
 div.floor
@@ -38,7 +109,9 @@ div.grass
 
 div.player
 {
-	background-color: #f00;
+	background-color: transparent;
+	background-image: url('sprites/spritesheet_use.png');
+	background-position: -288px -304px;
 }
 
 div.stone
@@ -48,7 +121,9 @@ div.stone
 
 div.tree
 {
-	background-color: #090;
+	background-color: #9FE30E;
+	background-image: url('sprites/spritesheet_use.png');
+	background-position: -512px -224px;
 }
 
 div.wood

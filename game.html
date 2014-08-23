@@ -2,11 +2,11 @@
 <HTML>
 	<HEAD>
 		<LINK HREF="style.css" REL="stylesheet" TYPE="text/css" />
+		<META CONTENT="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" NAME="viewport" />
 		<SCRIPT LANGUAGE="javascript" SRC="engine/engine.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.floor.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.grass.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.tree.js" TYPE="text/javascript"></SCRIPT>
@@ -77,43 +77,69 @@
 				};
 					
 				var element = document.getElementById('camera');
-
-				if(!element)
+				var buttons = new Array('down', 'left', 'right', 'up');
+				for(var i in buttons)
 				{
-					return;
+					var element = document.getElementById('overlay_dpad_' + buttons[i]);
+
+					if(!element)
+					{
+						continue;
+					}
+
+					element.onmousedown = function(event)
+					{
+						Controls.Set(event.target.id.substring(13), true);
+    				};
+
+					element.onmouseup = function(event)
+					{
+						Controls.Set(event.target.id.substring(13), false);
+    				};
+
+    				element.onmouseout = element.onmouseup;
 				}
 
-				camera = new Camera(element);
+				{
+					var element = document.getElementById('camera');
 
-				camera.Render(world);
+					if(!element)
+					{
+						return;
+					}
+
+					camera = new Camera(element);
+
+					camera.Render(world);
+				}
 			};
 
-			Engine.AddListener(function()
+			window.onresize = function(event)
 			{
-				camera.Render(world);
-			});
+				camera.OnResize(event);
+			}
 
 			Engine.AddListener(function()
 			{
 				var x = 0;
 				var y = 0;
 
-				if(Controls.Directions['left'])
+				if(Controls.Get('left'))
 				{
 					x -= player.Width;
 				}
 
-				if(Controls.Directions['right'])
+				if(Controls.Get('right'))
 				{
 					x += player.Width;
 				}
 
-				if(Controls.Directions['up'])
+				if(Controls.Get('up'))
 				{
 					y -= player.Height;
 				}
 
-				if(Controls.Directions['down'])
+				if(Controls.Get('down'))
 				{
 					y += player.Height;
 				}
@@ -122,7 +148,7 @@
 				{
 					return;
 				}
-				
+
 				// Remove old player object
 				player.World.Entities.Grid.Remove(player);
 				player.X += x; // Update player obj coords
@@ -151,5 +177,15 @@
 			<div id="qr"></div>
 		</div>
 		<DIV ID="camera"></DIV>
+		<DIV ID="overlay">
+			<DIV ID="overlay_dpad">
+				<DIV CLASS="button" ID="overlay_dpad_up"></DIV>
+				<DIV CLASS="button" ID="overlay_dpad_left"></DIV>
+				<DIV CLASS="button" ID="overlay_dpad_right"></DIV>
+				<DIV CLASS="button" ID="overlay_dpad_down"></DIV>
+			</DIV>
+			<DIV ID="overlay_buttons">
+			</DIV>
+		</DIV>
 	</BODY>
 </HTML>

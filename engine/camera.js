@@ -15,8 +15,8 @@ function Camera(element)
 	this.Element = element;
 
 	// Camera resolution?
-	this.Height = 720;
-	this.Width = 1280;
+	this.Height = 0;
+	this.Width  = 0;
 
 	// TBC (to be commented)
 	this.X = 0;
@@ -83,4 +83,20 @@ function Camera(element)
 			this.Element.appendChild(element);
 		}
 	};
+
+	this.OnResize = function(event)
+	{
+		this.Height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		this.Width  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+		if(!this.Element)
+		{
+			return;
+		}
+
+		this.Element.style.height = this.Height + 'px';
+		this.Element.style.width  = this.Width  + 'px';
+	};
+
+	this.OnResize(undefined);
 }
