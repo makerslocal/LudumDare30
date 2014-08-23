@@ -8,7 +8,9 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
+		
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+			<!--
 
 			var camera = undefined;
 
@@ -61,7 +63,7 @@
 
 				if(player.Scan(x, y))
 				{
-					return;
+					return; // Something collides, don't move anything
 				}
 
 				player.World.Entities.Grid.Remove(player);
@@ -94,6 +96,7 @@
 				camera.Render(world);
 			}
 
+		//-->
 		</SCRIPT>
 		<TITLE>The Game</TITLE>
 	</HEAD>
