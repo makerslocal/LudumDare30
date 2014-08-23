@@ -1,4 +1,5 @@
 /*
+ * Camera.js
  * Renders world
  */
 

@@ -1,6 +1,6 @@
 /*
- * The world
- * (well that was easy)
+ * World.js
+ * The world (well that was easy)
  */
 
 function World()
