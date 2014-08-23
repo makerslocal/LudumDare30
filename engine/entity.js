@@ -54,7 +54,7 @@ function Entity()
 
 		if(x && y)
 		{
-			return;
+			return true;
 		}
 
 		var height = 0;
