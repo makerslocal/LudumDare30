@@ -10,6 +10,11 @@ Tree.prototype.constructor = Entity;
 function Tree()
 {
 	// Create a new Tree object
+	this.Collide = function(entity)
+	{
+		return true;
+	}
+
 	this.Render = function(element)
 	{
 		if(!element)

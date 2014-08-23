@@ -26,12 +26,32 @@ div#camera
 	width: 1280px;
 }
 
+div.floor
+{
+	background-color: #fcc;
+}
+
+div.grass
+{
+	background-color: #cfc;
+}
+
 div.player
 {
-	background-color: red;
+	background-color: #f00;
+}
+
+div.stone
+{
+	background-color: #999;
 }
 
 div.tree
 {
-	background-color: green;
+	background-color: #090;
+}
+
+div.wood
+{
+	background-color: #960;
 }

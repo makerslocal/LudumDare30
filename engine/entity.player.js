@@ -10,6 +10,11 @@ Player.prototype.constructor = Entity;
 function Player()
 {
 	// Player.Render, create a new player?
+	this.Collide = function(entity)
+	{
+		return true;
+	}
+
 	this.Render = function(element)
 	{
 		if(!element)

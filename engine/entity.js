@@ -15,6 +15,11 @@ function Entity()
 	this.X = 0;
 	this.Y = 0;
 
+	this.Collide = function(entity)
+	{
+		return false;
+	}
+
 	this.IsTouching = function(entity)
 	{
 		if(!entity)
@@ -104,6 +109,11 @@ function Entity()
 		for(var i = 0; i < entities.length; i++)
 		{
 			if(entities[i] == this)
+			{
+				entities.splice(i--, 1);
+			}
+
+			if(!entities[i].Collide(this))
 			{
 				entities.splice(i--, 1);
 			}
