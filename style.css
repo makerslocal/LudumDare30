@@ -38,6 +38,48 @@ div#menu
 	
 }
 
+div#overlay
+{
+	bottom: 64px;
+	height: 192px;
+	left: 64px;
+	position: absolute;
+	width: 192px;
+	z-index: 1;
+}
+
+div#overlay a.button
+{
+	background-color: white;
+	height: 64px;
+	opacity: 0.5;
+	position: absolute;
+	width: 64px;
+}
+
+div#overlay a#overlay_down
+{
+	left: 64px;
+	bottom: 0;
+}
+
+div#overlay a#overlay_left
+{
+	left: 0;
+	top: 64px;
+}
+
+div#overlay a#overlay_right
+{
+	right: 0;
+	top: 64px;
+}
+
+div#overlay a#overlay_up
+{
+	left: 64px;
+}
+
 div.floor
 {
 	background-color: #fcc;

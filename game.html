@@ -6,7 +6,6 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.floor.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.grass.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.tree.js" TYPE="text/javascript"></SCRIPT>
@@ -53,16 +52,40 @@
 
 			window.onload = function()
 			{
-				var element = document.getElementById('camera');
+				var buttons = new Array('down', 'left', 'right', 'up');
 
-				if(!element)
+				for(var i in buttons)
 				{
-					return;
+					var element = document.getElementById('overlay_' + buttons[i]);
+
+					if(!element)
+					{
+						continue;
+					}
+
+					element.onmousedown = function(event)
+					{
+						Controls.Set(event.target.id.substring(8), true);
+					};
+
+					element.onmouseup = function(event)
+					{
+						Controls.Set(event.target.id.substring(8), false);
+					};
 				}
 
-				camera = new Camera(element);
+				{
+					var element = document.getElementById('camera');
 
-				camera.Render(world);
+					if(!element)
+					{
+						return;
+					}
+
+					camera = new Camera(element);
+
+					camera.Render(world);
+				}
 			};
 
 			window.onresize = function(event)
@@ -80,22 +103,22 @@
 				var x = 0;
 				var y = 0;
 
-				if(Controls.Directions['left'])
+				if(Controls.Get('left'))
 				{
 					x -= player.Width;
 				}
 
-				if(Controls.Directions['right'])
+				if(Controls.Get('right'))
 				{
 					x += player.Width;
 				}
 
-				if(Controls.Directions['up'])
+				if(Controls.Get('up'))
 				{
 					y -= player.Height;
 				}
 
-				if(Controls.Directions['down'])
+				if(Controls.Get('down'))
 				{
 					y += player.Height;
 				}
@@ -129,5 +152,11 @@
 	</HEAD>
 	<BODY>
 		<DIV ID="camera"></DIV>
+		<DIV ID="overlay">
+			<A CLASS="button" HREF="#" ID="overlay_up"></A>
+			<A CLASS="button" HREF="#" ID="overlay_left"></A>
+			<A CLASS="button" HREF="#" ID="overlay_right"></A>
+			<A CLASS="button" HREF="#" ID="overlay_down"></A>
+		</DIV>
 	</BODY>
 </HTML>
