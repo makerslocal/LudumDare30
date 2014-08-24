@@ -25,6 +25,18 @@ div#camera
 	overflow: hidden;
 	position: static;
 	width: 1280px;
+	z-index: 0;
+}
+
+div#menu
+{
+	background-color: #FF9999;
+	height: 100px;
+	width: 400px;
+	z-index: 10;
+	position: absolute;
+	visibility: hidden;
+	
 }
 
 div.floor
