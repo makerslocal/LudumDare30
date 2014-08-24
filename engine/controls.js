@@ -25,6 +25,7 @@ Controls.OnKeyDown = function(event)
 		case 98: // Down (num)
 			this.Directions['down']  = true;
 			break;
+			
 	}
 };
 
