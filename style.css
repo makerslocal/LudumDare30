@@ -81,7 +81,7 @@ div#overlay div#overlay_buttons div
 	width: 256px;
 }
 
-div#overlay div#overlay_buttons div#overlay_buttons_action
+div#overlay div#overlay_buttons div#overlay_control_action
 {
 	bottom: 0;
 	right: 0;
@@ -96,28 +96,28 @@ div#overlay div#overlay_dpad
 	width: 256px;
 }
 
-div#overlay div#overlay_dpad div#overlay_dpad_down
+div#overlay div#overlay_dpad div#overlay_control_down
 {
 	bottom: 0;
 	height: 40%;
 	left: 40%;
 }
 
-div#overlay div#overlay_dpad div#overlay_dpad_left
+div#overlay div#overlay_dpad div#overlay_control_left
 {
 	left: 0;
 	top: 40%;
 	width: 40%;
 }
 
-div#overlay div#overlay_dpad div#overlay_dpad_right
+div#overlay div#overlay_dpad div#overlay_control_right
 {
 	right: 0;
 	top: 40%;
 	width: 40%;
 }
 
-div#overlay div#overlay_dpad div#overlay_dpad_up
+div#overlay div#overlay_dpad div#overlay_control_up
 {
 	height: 40%;
 	left: 40%;

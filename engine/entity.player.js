@@ -13,6 +13,8 @@ function Player()
 	this.Style.Background.Position.X = -288;
 	this.Style.Background.Position.Y = -304;
 
+	this.Direction = undefined;
+
 	// Player.Render, create a new player?
 	this.Collide = function(entity)
 	{
