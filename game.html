@@ -66,12 +66,26 @@
 					element.onmousedown = function(event)
 					{
 						Controls.Set(event.target.id.substring(8), true);
-					};
+
+						var e = event || window.event;
+						e.preventDefault && e.preventDefault();
+						e.stopPropagation && e.stopPropagation();
+						e.cancelBubble = true;
+						e.returnValue = false;
+						return false;
+    				};
 
 					element.onmouseup = function(event)
 					{
 						Controls.Set(event.target.id.substring(8), false);
-					};
+
+						var e = event || window.event;
+						e.preventDefault && e.preventDefault();
+						e.stopPropagation && e.stopPropagation();
+						e.cancelBubble = true;
+						e.returnValue = false;
+						return false;
+    				};
 				}
 
 				{
