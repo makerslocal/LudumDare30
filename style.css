@@ -33,22 +33,12 @@ div#camera
 	z-index: 0;
 }
 
-div#menu
-{
-	background-color: #FF9999;
-	height: 100px;
-	width: 400px;
-	z-index: 10;
-	position: absolute;
-	visibility: hidden;
-	
-}
-
 div#overlay
 {
 	bottom: 64px;
 	position: absolute;
 	width: 100%;
+	height: 100%;
 	z-index: 1;
 }
 
@@ -86,6 +76,50 @@ div#overlay div#overlay_buttons div#overlay_control_action
 	bottom: 0;
 	right: 0;
 }
+
+
+
+div#overlay div#overlay_menu
+{
+	/* cancells the absolute positioning on the div#overlay item */
+	top: 64px; 
+	left: 200px;
+	position: absolute;
+}
+
+div#overlay div#overlay_menu div
+{
+width: 400px;
+height: 30px;
+	top: 0px;
+	left: 0px;
+}
+
+div#overlay_buttons_test select {
+  display: none;
+}
+
+div#overlay_buttons_test ul {
+	text-align: center;
+	padding-top: 3px;
+}
+
+div#overlay_buttons_test ul li {
+	display: inline;
+}
+
+div#overlay_buttons_test ul a {
+	display: inline;
+	text-decoration: none;
+}
+
+@media (max-width: 960px) {
+  nav div#overlay_menu ul     { display: none; }
+  nav div#overlay_menu select { display: inline-block; }
+}
+
+
+
 
 div#overlay div#overlay_dpad
 {
