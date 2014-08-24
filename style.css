@@ -6,12 +6,19 @@
 
 body
 {
-	background-color: black;
+	background-color: #9FE30E;
 	overflow: hidden;
+}
+
+canvas
+{
+	height: 100%;
+	width: 100%;
 }
 
 div
 {
+	background-repeat: no-repeat;
 	height: 16px;
 	position: absolute;
 	width: 16px;
@@ -19,19 +26,191 @@ div
 
 div#camera
 {
-	background-color: white;
 	height: 720px;
 	overflow: hidden;
 	position: static;
 	width: 1280px;
+	z-index: 0;
+}
+
+div#overlay
+{
+	bottom: 64px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+}
+
+div#overlay div.button
+{
+	background-color: white;
+	height: 20%;
+	opacity: 0.5;
+	position: absolute;
+	width: 20%;
+}
+
+div#overlay div.button:active
+{
+	opacity: 0.75;
+}
+
+div#overlay div#overlay_buttons
+{
+	bottom: 0;
+	right: 64px;
+	position: absolute;
+}
+
+div#overlay div#overlay_buttons div
+{
+	bottom: 0;
+	height: 256px;
+	right: 0;
+	width: 256px;
+}
+
+div#overlay div#overlay_buttons div#overlay_control_action
+{
+	bottom: 0;
+	right: 0;
+}
+
+
+
+div#overlay div#overlay_menu
+{
+	/* cancells the absolute positioning on the div#overlay item */
+	top: 64px; 
+	left: 200px;
+	position: absolute;
+	width: 400px;
+	height: 30px;
+}
+
+div#overlay_menu select {
+  display: none;
+}
+
+div#overlay_menu ul {
+	text-align: center;
+	padding-top: 3px;
+	background-color: white;
+	opacity: 0.6;
+}
+
+div#overlay_menu ul:hover {
+	background-color: white;
+	opacity: 1.0;
+}
+
+div#overlay_menu ul li {
+	display: inline;
+	opacity: 1.0;
+	background-color: none;
+}
+
+div#overlay_menu ul li:hover {
+	background-color: white;
+}
+
+div#overlay_menu ul a {
+	display: inline;
+	text-decoration: none;
+	opacity: 1.0;
+	color: #000000;
+}
+
+@media (max-width: 960px) {
+  nav div#overlay_menu ul     { display: none; }
+  nav div#overlay_menu select { display: inline-block; }
+}
+
+
+
+
+div#overlay div#overlay_dpad
+{
+	bottom: 0;
+	height: 256px;
+	left: 64px;
+	position: absolute;
+	width: 256px;
+}
+
+div#overlay div#overlay_dpad div#overlay_control_down
+{
+	bottom: 0;
+	height: 40%;
+	left: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_control_left
+{
+	left: 0;
+	top: 40%;
+	width: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_control_right
+{
+	right: 0;
+	top: 40%;
+	width: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_control_up
+{
+	height: 40%;
+	left: 40%;
+	top: 0;
+}
+
+div.floor
+{
+	background-color: #fcc;
+}
+
+div.grass
+{
+	background-color: #cfc;
 }
 
 div.player
 {
-	background-color: red;
+	background-color: transparent;
+	background-image: url('sprites/spritesheet_use.png');
+	background-position: -288px -304px;
+}
+
+div.stone
+{
+	background-color: #999;
 }
 
 div.tree
 {
-	background-color: green;
+	background-color: #9FE30E;
+	background-image: url('sprites/spritesheet_use.png');
+	background-position: -512px -224px;
 }
+
+div.wood
+{
+	background-color: #960;
+}
+
+div#debug {
+	position:absolute;
+	z-index:1337;
+	top:0px; left:0px;
+}
+div#qr {
+	background-color:white;
+	border:16px solid white;
+	width:255px;
+	height:255px;	
+	display:none;
+}
+

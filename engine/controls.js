@@ -1,55 +1,95 @@
 var Controls = new Object();
 
-Controls.Directions = new Object();
+Controls.__Values = new Object();
+
+Controls.Get = function(control)
+{
+	if(!control)
+	{
+		return;
+	}
+
+	if(control.ID)
+	{
+		control = control.ID;
+	}
+
+	return this.__Values[control];
+}
 
 Controls.OnKeyDown = function(event)
 {
-	switch(event.keyCode)
+	if(!Enums.Controls)
 	{
-		case 37:  // Left
-		case 100: // Left (num)
-			this.Directions['left']  = true;
-			break;
+		return;
+	}
 
-		case 38:  // Up
-		case 104: // Up (num)
-			this.Directions['up']  = true;
-			break;
+	for(var control in Enums.Controls)
+	{
+		if(!control)
+		{
+			continue;
+		}
 
-		case 39:  // Right
-		case 102: // Right (num)
-			this.Directions['right']  = true;
-			break;
+		if(!Enums.Controls[control].KeyCodes)
+		{
+			continue;
+		}
 
-		case 40: // Down
-		case 98: // Down (num)
-			this.Directions['down']  = true;
-			break;
+		for(var keyCode in Enums.Controls[control].KeyCodes)
+		{
+			if(event.keyCode != Enums.Controls[control].KeyCodes[keyCode])
+			{
+				continue;
+			}
+
+			this.Set(Enums.Controls[control].ID, true);
+		}
 	}
 };
 
 Controls.OnKeyUp = function(event)
 {
-	switch(event.keyCode)
+	if(!Enums.Controls)
 	{
-		case 37:  // Left
-		case 100: // Left (num)
-			this.Directions['left'] = false;
-			break;
+		return;
+	}
 
-		case 38:  // Up
-		case 104: // Up (num)
-			this.Directions['up']  = false;
-			break;
+	for(var control in Enums.Controls)
+	{
+		if(!control)
+		{
+			continue;
+		}
 
-		case 39:  // Right
-		case 102: // Right (num)
-			this.Directions['right']  = false;
-			break;
+		if(!Enums.Controls[control].KeyCodes)
+		{
+			continue;
+		}
 
-		case 40: // Down
-		case 98: // Down (num)
-			this.Directions['down']  = false;
-			break;
+		for(var keyCode in Enums.Controls[control].KeyCodes)
+		{
+			if(event.keyCode != Enums.Controls[control].KeyCodes[keyCode])
+			{
+				continue;
+			}
+
+			this.Set(Enums.Controls[control].ID, false);
+		}
 	}
 };
+
+Controls.Set = function(control, value)
+{
+	if(!control)
+	{
+		return;
+	}
+
+	if(control.ID)
+	{
+		control = control.ID;
+	}
+
+	this.__Values[control]  = !!value;
+}

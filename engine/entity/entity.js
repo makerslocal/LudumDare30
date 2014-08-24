@@ -7,6 +7,11 @@ function Entity()
 	// I suspect this is the pixel dim of our character
 	this.Height = 16;
 	this.Width = 16;
+
+	this.Style = new Style();
+
+	this.Style.Height = this.Height;
+	this.Style.Width = this.Width;
 	
 	// Not sure what's going on here.
 	this.World = undefined;
@@ -14,6 +19,11 @@ function Entity()
 	// Initialize character's x/y
 	this.X = 0;
 	this.Y = 0;
+
+	this.Collide = function(entity)
+	{
+		return false;
+	}
 
 	this.IsTouching = function(entity)
 	{
@@ -104,6 +114,11 @@ function Entity()
 		for(var i = 0; i < entities.length; i++)
 		{
 			if(entities[i] == this)
+			{
+				entities.splice(i--, 1);
+			}
+
+			if(!entities[i].Collide(this))
 			{
 				entities.splice(i--, 1);
 			}
