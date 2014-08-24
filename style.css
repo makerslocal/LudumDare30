@@ -85,32 +85,41 @@ div#overlay div#overlay_menu
 	top: 64px; 
 	left: 200px;
 	position: absolute;
+	width: 400px;
+	height: 30px;
 }
 
-div#overlay div#overlay_menu div
-{
-width: 400px;
-height: 30px;
-	top: 0px;
-	left: 0px;
-}
-
-div#overlay_buttons_test select {
+div#overlay_menu select {
   display: none;
 }
 
-div#overlay_buttons_test ul {
+div#overlay_menu ul {
 	text-align: center;
 	padding-top: 3px;
+	background-color: white;
+	opacity: 0.6;
 }
 
-div#overlay_buttons_test ul li {
+div#overlay_menu ul:hover {
+	background-color: white;
+	opacity: 1.0;
+}
+
+div#overlay_menu ul li {
 	display: inline;
+	opacity: 1.0;
+	background-color: none;
 }
 
-div#overlay_buttons_test ul a {
+div#overlay_menu ul li:hover {
+	background-color: white;
+}
+
+div#overlay_menu ul a {
 	display: inline;
 	text-decoration: none;
+	opacity: 1.0;
+	color: #000000;
 }
 
 @media (max-width: 960px) {
