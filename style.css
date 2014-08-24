@@ -123,8 +123,8 @@ div#overlay_menu ul a {
 }
 
 @media (max-width: 960px) {
-  nav div#overlay_menu ul     { display: none; }
-  nav div#overlay_menu select { display: inline-block; }
+  div#overlay_menu ul     { display: none; }
+  div#overlay_menu select { display: inline-block; }
 }
 
 
