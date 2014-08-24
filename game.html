@@ -65,6 +65,11 @@
 				camera.Render(world);
 			};
 
+			window.onresize = function(event)
+			{
+				camera.OnResize(event);
+			}
+
 			Engine.AddListener(function()
 			{
 				camera.Render(world);

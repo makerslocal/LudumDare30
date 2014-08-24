@@ -6,7 +6,7 @@
 
 body
 {
-	background-color: black;
+	background-color: #9FE30E;
 	overflow: hidden;
 }
 
@@ -20,7 +20,6 @@ div
 
 div#camera
 {
-	background-color: #9FE30E;
 	height: 720px;
 	overflow: hidden;
 	position: static;
