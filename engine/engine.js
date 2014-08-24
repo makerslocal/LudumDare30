@@ -4,6 +4,8 @@ Engine.Cycles = 0;
 
 Engine.Listeners = new Array();
 
+Engine.Paused = false;
+
 Engine.AddListener = function(listener)
 {
 	if(!this.Listeners)
@@ -16,6 +18,11 @@ Engine.AddListener = function(listener)
 
 Engine.Cycle = function()
 {
+	if(this.Paused)
+	{
+		return;
+	}
+
 	this.Cycles++;
 
 	if(this.Listeners.length < 1)

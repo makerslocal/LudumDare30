@@ -7,6 +7,11 @@ function Entity()
 	// I suspect this is the pixel dim of our character
 	this.Height = 16;
 	this.Width = 16;
+
+	this.Style = new Style();
+
+	this.Style.Height = this.Height;
+	this.Style.Width = this.Width;
 	
 	// Not sure what's going on here.
 	this.World = undefined;

@@ -6,8 +6,14 @@
 
 body
 {
-	background-color: black;
+	background-color: #9FE30E;
 	overflow: hidden;
+}
+
+canvas
+{
+	height: 100%;
+	width: 100%;
 }
 
 div
@@ -20,7 +26,6 @@ div
 
 div#camera
 {
-	background-color: #9FE30E;
 	height: 720px;
 	overflow: hidden;
 	position: static;
@@ -37,6 +42,86 @@ div#menu
 	position: absolute;
 	visibility: hidden;
 	
+}
+
+div#overlay
+{
+	bottom: 64px;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+}
+
+div#overlay div.button
+{
+	background-color: white;
+	height: 20%;
+	opacity: 0.5;
+	position: absolute;
+	width: 20%;
+}
+
+div#overlay div.button:active
+{
+	opacity: 0.75;
+}
+
+div#overlay div#overlay_buttons
+{
+	bottom: 0;
+	right: 64px;
+	position: absolute;
+}
+
+div#overlay div#overlay_buttons div
+{
+	bottom: 0;
+	height: 256px;
+	right: 0;
+	width: 256px;
+}
+
+div#overlay div#overlay_buttons div#overlay_buttons_action
+{
+	bottom: 0;
+	right: 0;
+}
+
+div#overlay div#overlay_dpad
+{
+	bottom: 0;
+	height: 256px;
+	left: 64px;
+	position: absolute;
+	width: 256px;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_down
+{
+	bottom: 0;
+	height: 40%;
+	left: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_left
+{
+	left: 0;
+	top: 40%;
+	width: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_right
+{
+	right: 0;
+	top: 40%;
+	width: 40%;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_up
+{
+	height: 40%;
+	left: 40%;
+	top: 0;
 }
 
 div.floor
@@ -72,3 +157,17 @@ div.wood
 {
 	background-color: #960;
 }
+
+div#debug {
+	position:absolute;
+	z-index:1337;
+	top:0px; left:0px;
+}
+div#qr {
+	background-color:white;
+	border:16px solid white;
+	width:255px;
+	height:255px;	
+	display:none;
+}
+
