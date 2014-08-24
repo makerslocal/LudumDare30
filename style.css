@@ -41,10 +41,8 @@ div#menu
 div#overlay
 {
 	bottom: 64px;
-	height: 256px;
 	left: 64px;
 	position: absolute;
-	width: 256px;
 	z-index: 1;
 }
 
@@ -62,31 +60,41 @@ div#overlay div.button:active
 	opacity: 0.75;
 }
 
-div#overlay div#overlay_down
+div#overlay div#overlay_dpad
+{
+	bottom: 0;
+	height: 256px;
+	left: 0;
+	position: absolute;
+	width: 256px;
+}
+
+div#overlay div#overlay_dpad div#overlay_dpad_down
 {
 	bottom: 0;
 	height: 40%;
 	left: 40%;
 }
 
-div#overlay div#overlay_left
+div#overlay div#overlay_dpad div#overlay_dpad_left
 {
 	left: 0;
 	top: 40%;
 	width: 40%;
 }
 
-div#overlay div#overlay_right
+div#overlay div#overlay_dpad div#overlay_dpad_right
 {
 	right: 0;
 	top: 40%;
 	width: 40%;
 }
 
-div#overlay div#overlay_up
+div#overlay div#overlay_dpad div#overlay_dpad_up
 {
 	height: 40%;
 	left: 40%;
+	top: 0;
 }
 
 div.floor

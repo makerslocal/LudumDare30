@@ -2,6 +2,7 @@
 <HTML>
 	<HEAD>
 		<LINK HREF="style.css" REL="stylesheet" TYPE="text/css" />
+		<META CONTENT="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" NAME="viewport" />
 		<SCRIPT LANGUAGE="javascript" SRC="engine/engine.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity.js" TYPE="text/javascript"></SCRIPT>
@@ -56,7 +57,7 @@
 
 				for(var i in buttons)
 				{
-					var element = document.getElementById('overlay_' + buttons[i]);
+					var element = document.getElementById('overlay_dpad_' + buttons[i]);
 
 					if(!element)
 					{
@@ -65,13 +66,15 @@
 
 					element.onmousedown = function(event)
 					{
-						Controls.Set(event.target.id.substring(8), true);
+						Controls.Set(event.target.id.substring(13), true);
     				};
 
 					element.onmouseup = function(event)
 					{
-						Controls.Set(event.target.id.substring(8), false);
+						Controls.Set(event.target.id.substring(13), false);
     				};
+
+    				element.onmouseout = element.onmouseup;
 				}
 
 				{
@@ -92,11 +95,6 @@
 			{
 				camera.OnResize(event);
 			}
-
-			Engine.AddListener(function()
-			{
-				camera.Render(world);
-			});
 
 			Engine.AddListener(function()
 			{
@@ -127,7 +125,7 @@
 				{
 					return;
 				}
-				
+
 				// Remove old player object
 				player.World.Entities.Grid.Remove(player);
 				player.X += x; // Update player obj coords
@@ -153,10 +151,14 @@
 	<BODY>
 		<DIV ID="camera"></DIV>
 		<DIV ID="overlay">
-			<DIV CLASS="button" ID="overlay_up"></DIV>
-			<DIV CLASS="button" ID="overlay_left"></DIV>
-			<DIV CLASS="button" ID="overlay_right"></DIV>
-			<DIV CLASS="button" ID="overlay_down"></DIV>
+			<DIV ID="overlay_dpad">
+				<DIV CLASS="button" ID="overlay_dpad_up"></DIV>
+				<DIV CLASS="button" ID="overlay_dpad_left"></DIV>
+				<DIV CLASS="button" ID="overlay_dpad_right"></DIV>
+				<DIV CLASS="button" ID="overlay_dpad_down"></DIV>
+			</DIV>
+			<DIV ID="overlay_buttons">
+			</DIV>
 		</DIV>
 	</BODY>
 </HTML>
