@@ -10,7 +10,9 @@ function Camera(element)
 	{
 		return; // Function was misscalled, exit early
 	}
-	
+
+	this.Bitmaps = new Object();
+
 	// Create a child of Camera, set it to our passed in element
 	this.Element = element;
 
@@ -37,7 +39,6 @@ function Camera(element)
 			return;
 		}
 
-		// Clear all children of Camera.Element
 		while(this.Element.firstChild)
 		{
 			this.Element.removeChild(this.Element.firstChild);
@@ -65,6 +66,18 @@ function Camera(element)
 			return;
 		}
 
+		var canvas = document.createElement('canvas');
+
+		var context;
+
+		if(canvas)
+		{
+			canvas.setAttribute('height', this.Height);
+			canvas.setAttribute('width',  this.Width);
+
+			context = canvas.getContext('2d');
+		}
+
 		for(var i = 0; i < count; i++)
 		{
 			// Select an item from world.Entities
@@ -73,21 +86,52 @@ function Camera(element)
 			var xx = entity.X - x;
 			var yy = entity.Y - y;
 
-			var element = document.createElement('div');
+			if(!canvas)
+			{
+				var element = document.createElement('div');
 
-			element.style.left = xx + 'px';
-			element.style.top = yy + 'px';
+				element.style.left = xx + 'px';
+				element.style.top = yy + 'px';
 
-			entity.Render(element);
+				entity.Render(element);
 
-			this.Element.appendChild(element);
+				this.Element.appendChild(element);
+			}
+			else
+			{
+				var src = entity.Style.Background.Image;
+
+				if(src)
+				{
+					if(!this.Bitmaps[src])
+					{
+						this.Bitmaps[src] = new Image();
+						this.Bitmaps[src].src = src;
+					}
+
+					if(!this.Bitmaps[src].complete)
+					{
+						continue;
+					}
+
+					var offsetX = -entity.Style.Background.Position.X;
+					var offsetY = -entity.Style.Background.Position.Y;
+
+					context.drawImage(this.Bitmaps[src], offsetX, offsetY, entity.Width, entity.Height, xx, yy, entity.Width, entity.Height);
+				}
+			}
+		}
+
+		if(canvas)
+		{
+			this.Element.appendChild(canvas);
 		}
 	};
 
 	this.OnResize = function(event)
 	{
 		this.Height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-		this.Width  = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+		this.Width  = Math.max(document.documentElement.clientWidth,  window.innerWidth  || 0);
 
 		if(!this.Element)
 		{

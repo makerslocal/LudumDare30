@@ -9,6 +9,10 @@ Player.prototype.constructor = Entity;
 // The Player object
 function Player()
 {
+	this.Style.Background.Image = 'sprites/spritesheet_use.png';
+	this.Style.Background.Position.X = -288;
+	this.Style.Background.Position.Y = -304;
+
 	// Player.Render, create a new player?
 	this.Collide = function(entity)
 	{
