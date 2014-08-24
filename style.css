@@ -47,8 +47,8 @@ div#menu
 div#overlay
 {
 	bottom: 64px;
-	left: 64px;
 	position: absolute;
+	width: 100%;
 	z-index: 1;
 }
 
@@ -66,11 +66,32 @@ div#overlay div.button:active
 	opacity: 0.75;
 }
 
+div#overlay div#overlay_buttons
+{
+	bottom: 0;
+	right: 64px;
+	position: absolute;
+}
+
+div#overlay div#overlay_buttons div
+{
+	bottom: 0;
+	height: 256px;
+	right: 0;
+	width: 256px;
+}
+
+div#overlay div#overlay_buttons div#overlay_buttons_action
+{
+	bottom: 0;
+	right: 0;
+}
+
 div#overlay div#overlay_dpad
 {
 	bottom: 0;
 	height: 256px;
-	left: 0;
+	left: 64px;
 	position: absolute;
 	width: 256px;
 }
