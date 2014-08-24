@@ -12,15 +12,17 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/tree.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/item.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
-		<script language="javascript" src="libraries/binascii.js"></script>
-		<script type="text/javascript" src="libraries/jquery.min.js"></script>
-		<script type="text/javascript" src="libraries/qrgen/src/jquery.qrcode.js"></script>
-		<script type="text/javascript" src="libraries/qrgen/src/qrcode.js"></script>
+		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" SRC="libraries/jquery.min.js"></SCRIPT>
+		<SCRIPT TYPE"text/javascript" SRC="libraries/qrgen/src/jquery.qrcode.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" SRC="libraries/qrgen/src/qrcode.js"></SCRIPT>
 
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
@@ -33,7 +35,7 @@
 			{
 				var tree = new Tree();
 
-				tree.X = (Math.floor(Math.random() * 128) - 64) << 4;
+				tree.X = (Math.floor(Math.random() * 124) - 64) << 4;
 				tree.Y = (Math.floor(Math.random() * 128) - 64) << 4;
 
 				world.Entities.Add(tree);
@@ -55,6 +57,13 @@
 			player.Y = 0;
 
 			world.Entities.Add(player);
+
+			var item = new Item();
+
+			item.X = (Math.floor(Math.random() * 64) - 32) << 4;
+			item.Y = (Math.floor(Math.random() * 64) - 32) << 4;
+
+			world.Entities.Add(item);
 
 			//
 
