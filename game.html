@@ -16,6 +16,11 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
+		<script language="javascript" src="libraries/binascii.js"></script>
+		<script type="text/javascript" src="libraries/jquery.min.js"></script>
+		<script type="text/javascript" src="libraries/qrgen/src/jquery.qrcode.js"></script>
+		<script type="text/javascript" src="libraries/qrgen/src/qrcode.js"></script>
+
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
 		<!--
@@ -32,11 +37,21 @@
 
 				world.Entities.Add(tree);
 			}
+			
+			/*
+			//generate simple setup
+			tree = new Tree();
+			tree.X = 16; tree.Y = 32;
+			world.Entities.Add(tree);
+			tree = new Tree();
+			tree.X = -32; tree.Y = 16;
+			world.Entities.Add(tree);
+			*/
 
 			var player = new Player();
 
-			player.X = 64;
-			player.Y = 32;
+			player.X = 0;
+			player.Y = 0;
 
 			world.Entities.Add(player);
 
@@ -54,8 +69,17 @@
 
 			window.onload = function()
 			{
-				var buttons = new Array('down', 'left', 'right', 'up');
 
+				document.getElementById("btn-export").onclick = function(e) {
+					//alert(world.Entities.Export(128,128,-64,-64));
+					exported = world.Entities.Export(128,128,-64,-64);
+					jQuery('#qr').html('').qrcode(exported).show();
+
+				};
+					
+				var element = document.getElementById('camera');
+
+				var buttons = new Array('down', 'left', 'right', 'up');
 				for(var i in buttons)
 				{
 					var element = document.getElementById('overlay_dpad_' + buttons[i]);
@@ -150,6 +174,10 @@
 		<TITLE>I Wanna Be The Game: The Movie: The Game: The Game</TITLE>
 	</HEAD>
 	<BODY>
+		<div id="debug">
+			<input type="button" id="btn-export" value="export">
+			<div id="qr"></div>
+		</div>
 		<DIV ID="camera"></DIV>
 		<DIV ID="overlay">
 			<DIV ID="overlay_dpad">
