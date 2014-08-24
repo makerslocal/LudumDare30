@@ -41,43 +41,52 @@ div#menu
 div#overlay
 {
 	bottom: 64px;
-	height: 192px;
+	height: 256px;
 	left: 64px;
 	position: absolute;
-	width: 192px;
+	width: 256px;
 	z-index: 1;
 }
 
-div#overlay a.button
+div#overlay div.button
 {
 	background-color: white;
-	height: 64px;
+	height: 20%;
 	opacity: 0.5;
 	position: absolute;
-	width: 64px;
+	width: 20%;
 }
 
-div#overlay a#overlay_down
+div#overlay div.button:active
 {
-	left: 64px;
-	bottom: 0;
+	opacity: 0.75;
 }
 
-div#overlay a#overlay_left
+div#overlay div#overlay_down
+{
+	bottom: 0;
+	height: 40%;
+	left: 40%;
+}
+
+div#overlay div#overlay_left
 {
 	left: 0;
-	top: 64px;
+	top: 40%;
+	width: 40%;
 }
 
-div#overlay a#overlay_right
+div#overlay div#overlay_right
 {
 	right: 0;
-	top: 64px;
+	top: 40%;
+	width: 40%;
 }
 
-div#overlay a#overlay_up
+div#overlay div#overlay_up
 {
-	left: 64px;
+	height: 40%;
+	left: 40%;
 }
 
 div.floor

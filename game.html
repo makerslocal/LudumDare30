@@ -66,25 +66,11 @@
 					element.onmousedown = function(event)
 					{
 						Controls.Set(event.target.id.substring(8), true);
-
-						var e = event || window.event;
-						e.preventDefault && e.preventDefault();
-						e.stopPropagation && e.stopPropagation();
-						e.cancelBubble = true;
-						e.returnValue = false;
-						return false;
     				};
 
 					element.onmouseup = function(event)
 					{
 						Controls.Set(event.target.id.substring(8), false);
-
-						var e = event || window.event;
-						e.preventDefault && e.preventDefault();
-						e.stopPropagation && e.stopPropagation();
-						e.cancelBubble = true;
-						e.returnValue = false;
-						return false;
     				};
 				}
 
@@ -167,10 +153,10 @@
 	<BODY>
 		<DIV ID="camera"></DIV>
 		<DIV ID="overlay">
-			<A CLASS="button" HREF="#" ID="overlay_up"></A>
-			<A CLASS="button" HREF="#" ID="overlay_left"></A>
-			<A CLASS="button" HREF="#" ID="overlay_right"></A>
-			<A CLASS="button" HREF="#" ID="overlay_down"></A>
+			<DIV CLASS="button" ID="overlay_up"></DIV>
+			<DIV CLASS="button" ID="overlay_left"></DIV>
+			<DIV CLASS="button" ID="overlay_right"></DIV>
+			<DIV CLASS="button" ID="overlay_down"></DIV>
 		</DIV>
 	</BODY>
 </HTML>
