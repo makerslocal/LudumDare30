@@ -84,7 +84,7 @@
 						continue;
 					}
 
-					var element = document.getElementById('overlay_control_' + control.toLowerCase());
+					var element = document.getElementById('overlay_control_' + Enums.Controls[control].ID);
 
 					if(!element)
 					{
@@ -148,7 +148,7 @@
 					x += Enums.Directions[direction].X * player.Width;
 					y += Enums.Directions[direction].Y * player.Height;
 
-					player.Direction = direction;
+					player.Direction = Enums.Directions[direction].ID;
 				}
 
 				if(player.Scan(x, y))
