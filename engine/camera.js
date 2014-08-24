@@ -99,6 +99,8 @@ function Camera(element)
 			}
 			else
 			{
+				entity.Render();
+
 				var src = entity.Style.Background.Image;
 
 				if(src)
