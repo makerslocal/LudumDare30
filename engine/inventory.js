@@ -169,3 +169,29 @@ Inventory.Select = function(item)
 
 	this.__Item = item;
 };
+
+
+Engine.AddListener(function(cycles)
+{
+	if(Controls.Get(Enums.Controls.Inventory))
+	{
+		var element = document.getElementById('inventory');
+
+		if(element)
+		{
+			switch(element.style.display)
+			{
+				case 'none':
+					Engine.Paused = true;
+					Inventory.Render(element);
+					element.style.display = 'block';
+					break;
+
+				default:
+					element.style.display = 'none';
+					Engine.Paused = false;
+					break;
+			}
+		}
+	}
+});
