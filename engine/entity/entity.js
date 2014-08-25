@@ -32,22 +32,22 @@ function Entity()
 			return false; // No entity = no touching?
 		}
 
-		if(this.X + this.Width < entity.X)
+		if(this.X + this.Width - 1 < entity.X)
 		{
 			return false;
 		}
 
-		if(this.Y + this.Height < entity.Y)
+		if(this.Y + this.Height - 1 < entity.Y)
 		{
 			return false;
 		}
 
-		if(this.X > entity.X + entity.Width)
+		if(this.X > entity.X + entity.Width - 1)
 		{
 			return false;
 		}
 
-		if(this.Y > entity.Y + entity.Height)
+		if(this.Y > entity.Y + entity.Height - 1)
 		{
 			return false;
 		}

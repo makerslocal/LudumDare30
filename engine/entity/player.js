@@ -20,6 +20,11 @@ function Player()
 		return true;
 	}
 
+	this.OnPickup = function(entity)
+	{
+		
+	}
+
 	this.Render = function(element)
 	{
 		switch(this.Direction)

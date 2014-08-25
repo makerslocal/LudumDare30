@@ -11,6 +11,8 @@ function Item()
 	this.Style.Background.Position.X = -432;
 	this.Style.Background.Position.Y = -480;
 
+	this.OnPickup = undefined;
+
 	this.Render = function(element)
 	{
 		if(!element)
@@ -28,6 +30,10 @@ function Item()
 		{
 			if (!self.World){
 				return;
+			}
+			if (this.OnPickup)
+			{
+				this.OnPickup(player);
 			}
 			self.World.Entities.Remove(self);
 			delete self;

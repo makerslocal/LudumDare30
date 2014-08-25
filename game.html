@@ -5,6 +5,7 @@
 		<META CONTENT="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" NAME="viewport" />
 		<SCRIPT LANGUAGE="javascript" SRC="engine/enumerators.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/engine.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/inventory.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/style.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/entity.js" TYPE="text/javascript"></SCRIPT>
@@ -19,6 +20,9 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/axe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
 		<SCRIPT TYPE="text/javascript" SRC="libraries/jquery.min.js"></SCRIPT>
 		<SCRIPT TYPE"text/javascript" SRC="libraries/qrgen/src/jquery.qrcode.js"></SCRIPT>
@@ -26,6 +30,11 @@
 
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+
+		var axe = new Items_Axe();
+		Inventory.Add(axe);
+		Inventory.Select(axe);
+
 		<!--
 			var camera = undefined;
 
@@ -85,6 +94,13 @@
 					jQuery('#qr').html('').qrcode(exported).show();
 
 				};
+				document.getElementById("btn-export-mobile").onclick = function(e) {
+					//alert(world.Entities.Export(128,128,-64,-64));
+					exported = world.Entities.Export(128,128,-64,-64);
+					jQuery('#qr').html('').qrcode(exported).show();
+
+				};
+				
 
 				for(var control in Enums.Controls)
 				{
@@ -132,8 +148,44 @@
 				camera.OnResize(event);
 			}
 
-			Engine.AddListener(function()
+			Engine.AddListener(function(cycles)
 			{
+				if(Controls.Get(Enums.Controls.Inventory))
+				{
+					var element = document.getElementById('inventory');
+
+					if(element)
+					{
+						switch(element.style.display)
+						{
+							case 'none':
+								Engine.Paused = true;
+								Inventory.Render(element);
+								element.style.display = 'block';
+								break;
+
+							default:
+								element.style.display = 'none';
+								while(element.firstChild)
+								{
+									element.removeChild(this.Element.firstChild);
+								}
+								Engine.Paused = false;
+								break;
+						}
+					}
+				}
+
+				if(Engine.Paused)
+				{
+					return;
+				}
+
+				if(Controls.Get(Enums.Controls.Action))
+				{
+					Inventory.OnAction();
+				}
+
 				var x = 0;
 				var y = 0;
 
@@ -157,20 +209,23 @@
 					x += Enums.Directions[direction].X * player.Width;
 					y += Enums.Directions[direction].Y * player.Height;
 
-					player.Direction = Enums.Directions[direction].ID;
+					player.Direction = direction;
 				}
 
 				if(player.Scan(x, y))
 				{
-					return;
+					x = 0;
+					y = 0;
 				}
-
-				// Remove old player object
-				player.World.Entities.Grid.Remove(player);
-				player.X += x; // Update player obj coords
-				player.Y += y; // ditto ^
-				// Create new player obj in updated location
-				player.World.Entities.Grid.Add(player);
+				else
+				{
+					// Remove old player object
+					player.World.Entities.Grid.Remove(player);
+					player.X += x; // Update player obj coords
+					player.Y += y; // ditto ^
+					// Create new player obj in updated location
+					player.World.Entities.Grid.Add(player);
+				}
 
 				if(!camera)
 				{
@@ -205,17 +260,32 @@
 			
 			<DIV ID="overlay_menu">
 					<NAV> 
-					<UL> 
+					<UL id="menu_desktop"> 
 					<LI><a id="btn-export" href="#">Export</a></LI> 
 					<LI><A href="https://github.com/makerslocal/LudumDare30" target="new">Github</A></LI>
+					</UL>
 					
-					<SELECT> 
-					<OPTION value="" selected="selected">Select</OPTION> 
-					<OPTION value="#">Export</OPTION> 
+					<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+						document.getElementById("menu_mobile").onchange = function () {
+							alert('changed');
+							if (this.selectedIndex > 1) {
+								window.location.href = this.value;
+							}
+							if (this.selectedIndex == 1) {
+								alert('here');
+								window.location.href = this.value;
+							}
+						}
+					</SCRIPT>
+					
+					<SELECT id="menu_mobile">
+					<OPTION value="#" selected="selected">Menu</OPTION> 
+					<OPTION value="#" id="btn-export-mobile">Export</OPTION> 
 					<OPTION value="https://github.com/makerslocal/LudumDare30">Github</OPTION>
-					</SELECT> 
+					</SELECT>
 					</NAV>
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
+		<DIV CLASS="modal" ID="inventory"></DIV>
 	</BODY>
 </HTML>
