@@ -19,6 +19,9 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/forest.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/player.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/rocks.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
@@ -45,30 +48,8 @@
 		<!--
 			var camera = undefined;
 
-			var world = new World();
-
-			Building.Generate();
-			Renderer.Update((Math.floor(Math.random() * 16) - 8) <<4, (Math.floor(Math.random() * 16) - 8) <<4, world);
-
-			for(var i = 0; i < 5000; i++)
-			{
-				var tree = new Tree();
-
-				tree.X = (Math.floor(Math.random() * 128) - 64) << 4;
-				tree.Y = (Math.floor(Math.random() * 128) - 64) << 4;
-
-				world.Entities.Add(tree);
-			}
-
-			for(var i = 0; i < 500; i++)
-			{
-				var rock = new Rock();
-
-				rock.X = (Math.floor(Math.random() * 124) - 64) << 4;
-				rock.Y = (Math.floor(Math.random() * 128) - 64) << 4;
-
-				world.Entities.Add(rock);
-			}
+			// Building.Generate();
+			// Renderer.Update((Math.floor(Math.random() * 16) - 8) <<4, (Math.floor(Math.random() * 16) - 8) <<4, world);
 			
 			/*
 			//generate simple setup
@@ -80,19 +61,28 @@
 			world.Entities.Add(tree);
 			*/
 
-			var player = new Player();
+			var entities = new Array();
 
-			player.X = 0;
-			player.Y = 0;
+			var player = Generators.Player.Generate();
 
-			world.Entities.Add(player);
+			entities.push(player);
+
+			entities = entities.concat(Generators.Forest.Generate(4096));
+			entities = entities.concat(Generators.Rocks.Generate(512));
 
 			var item = new Item();
 
 			item.X = (Math.floor(Math.random() * 64) - 32) << 4;
 			item.Y = (Math.floor(Math.random() * 64) - 32) << 4;
 
-			world.Entities.Add(item);
+			entities.push(item);
+
+			var world = new World();
+
+			world.Zones.Add(entities);
+
+			world.Zones.Add(Generators.Rocks.Generate(1024));
+			world.Zones.Add(Generators.Forest.Generate(1024));
 
 			//
 

@@ -4,14 +4,84 @@ function Zones(world)
 
 	var zones = new Object();
 
-	this.Add = function(x, y)
+	this.World = world;
+
+	this.Add = function(entities)
 	{
+		if(!entities)
+		{
+			return;
+		}
+
+		var x = 0;
+		var y = 0;
+
+		if(zones[0] && zones[0][0])
+		{
+			var points = new Array();
+
+			for(var xx in zones)
+			{
+				for(var yy in zones[xx])
+				{
+					points.push([parseInt(xx), parseInt(yy)]);
+				}
+			}
+
+			while(!x && !y)
+			{
+				var point = Math.floor(Math.random() * points.length);
+
+				var directions = [
+					Enums.Directions.Down,
+					Enums.Directions.Left,
+					Enums.Directions.Right,
+					Enums.Directions.Up
+				];
+
+				while(directions.length)
+				{
+					var direction = Math.floor(Math.random() * directions.length);
+
+					var xx = points[point][0] + directions[direction].X;
+					var yy = points[point][1] + directions[direction].Y;
+
+					directions.splice(direction, 1);
+
+					if(zones[xx] && zones[xx][yy])
+					{
+						continue;
+					}
+
+					x = xx;
+					y = yy;
+
+					break;
+				}
+
+				points.splice(point, 1);
+			}
+		}
+
 		if(!zones[x])
 		{
 			zones[x] = new Object();
 		}
 
 		zones[x][y] = true;
+
+		console.log([x,y]);
+
+		x = x << size;
+		y = y << size;
+
+		for(var i = 0; i < entities.length; i++)
+		{
+			entities[i].X += x;
+			entities[i].Y += y;
+
+			this.World.Entities.Add(entities[i]);
+		}
 	}
 
 	this.Search = function(height, width, x, y)
@@ -52,6 +122,4 @@ function Zones(world)
 
 		return found;
 	};
-
-	this.World = world;
 }
