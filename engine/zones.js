@@ -55,13 +55,6 @@ function Zones(world)
 			}
 		}
 
-		if(!zones[x])
-		{
-			zones[x] = new Object();
-		}
-
-		zones[x][y] = true;
-
 		x = x << size << 4;
 		y = y << size << 4;
 
@@ -71,6 +64,16 @@ function Zones(world)
 			entities[i].Y += y;
 
 			this.World.Entities.Add(entities[i]);
+
+			var xZone = entities[i].X >> 4 >> size;
+			var yZone = entities[i].Y >> 4 >> size;
+
+			if(!zones[xZone])
+			{
+				zones[xZone] = new Object();
+			}
+
+			zones[xZone][yZone] = true;
 		}
 	};
 
