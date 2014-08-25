@@ -6,6 +6,7 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/enumerators.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/engine.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/inventory.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/zones.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/style.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/entity.js" TYPE="text/javascript"></SCRIPT>
@@ -47,7 +48,7 @@
 			{
 				var tree = new Tree();
 
-				tree.X = (Math.floor(Math.random() * 124) - 64) << 4;
+				tree.X = (Math.floor(Math.random() * 128) - 64) << 4;
 				tree.Y = (Math.floor(Math.random() * 128) - 64) << 4;
 
 				world.Entities.Add(tree);

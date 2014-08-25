@@ -6,4 +6,8 @@
 function World()
 {
 	this.Entities = new Entities(this);
+
+	this.Zones = new Zones();
+
+	this.Zones.Add(0, 0);
 }
