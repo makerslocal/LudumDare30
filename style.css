@@ -33,6 +33,18 @@ div#camera
 	z-index: 0;
 }
 
+div.modal
+{
+	background-color: black;
+	display: none;
+	height: 100%;
+	opacity: 0.5;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 20;
+}
+
 div#menu
 {
 	background-color: #FF9999;

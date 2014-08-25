@@ -18,12 +18,10 @@ Engine.AddListener = function(listener)
 
 Engine.Cycle = function()
 {
-	if(this.Paused)
+	if(!this.Paused)
 	{
-		return;
+		this.Cycles++;
 	}
-
-	this.Cycles++;
 
 	if(this.Listeners.length < 1)
 	{
@@ -38,8 +36,8 @@ Engine.Cycle = function()
 			continue;
 		}
 
-		this.Listeners[i](this.Cycles);
+		this.Listeners[i](this.Paused ? undefined : this.Cycles);
 	}
 };
 
-setInterval(function() { Engine.Cycle(); }, 50);
+setInterval(function() { Engine.Cycle(); }, 100);
