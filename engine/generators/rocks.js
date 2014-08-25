@@ -15,8 +15,8 @@ Generators.Rocks = {
 		{
 			var rock = new Rock();
 
-			rock.X = (Math.floor(Math.random() * 128) - 64) << 4;
-			rock.Y = (Math.floor(Math.random() * 128) - 64) << 4;
+			rock.X = Math.floor(Math.random() * 128) << 4;
+			rock.Y = Math.floor(Math.random() * 128) << 4;
 
 			entities.push(rock);
 		}

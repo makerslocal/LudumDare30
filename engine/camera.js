@@ -89,8 +89,8 @@ function Camera(element)
 		{
 			var size = 1 << 7 << 4;
 
-			var xZone = (zones[zone][0] << 7 << 4) - x - (size >> 1);
-			var yZone = (zones[zone][1] << 7 << 4) - y - (size >> 1);
+			var xZone = (zones[zone][0] << 7 << 4) - x;
+			var yZone = (zones[zone][1] << 7 << 4) - y;
 
 			if(!canvas)
 			{

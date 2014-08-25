@@ -60,10 +60,10 @@ function Zones(world)
 			zones[x] = new Object();
 		}
 
-		zones[x][y] = '#9FE30E';
+		zones[x][y] = true;
 
-		x = x << size;
-		y = y << size;
+		x = x << size << 4;
+		y = y << size << 4;
 
 		for(var i = 0; i < entities.length; i++)
 		{
@@ -91,9 +91,6 @@ function Zones(world)
 
 	this.Search = function(height, width, x, y)
 	{
-		x += 1 << 4 << (size - 1);
-		y += 1 << 4 << (size - 1);
-
 		var xx = (x + width  - 1) >> size >> 4;
 		var yy = (y + height - 1) >> size >> 4;
 

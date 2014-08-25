@@ -6,8 +6,8 @@ Generators.Player = {
 	{
 		var entity = new Player();
 
-		entity.X = x || 0;
-		entity.Y = y || 0;
+		entity.X = x || 64 << 4;
+		entity.Y = y || 64 << 4;
 
 		return entity;
 	}

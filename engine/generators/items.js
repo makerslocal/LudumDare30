@@ -1,6 +1,6 @@
 var Generators = Generators || new Object();
 
-Generators.Forest = {
+Generators.Items = {
 
 	Generate : function(count)
 	{
@@ -13,12 +13,12 @@ Generators.Forest = {
 
 		for(var i = 0; i < count; i++)
 		{
-			var tree = new Tree();
+			var item = new Item();
 
-			tree.X = Math.floor(Math.random() * 128) << 4;
-			tree.Y = Math.floor(Math.random() * 128) << 4;
+			item.X = Math.floor(Math.random() * 128) << 4;
+			item.Y = Math.floor(Math.random() * 128) << 4;
 
-			entities.push(tree);
+			entities.push(item);
 		}
 
 		return entities;

@@ -21,10 +21,11 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/building.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/forest.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/items.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/rocks.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/building.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/axe.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
@@ -68,14 +69,8 @@
 			entities.push(player);
 
 			entities = entities.concat(Generators.Forest.Generate(4096));
-			entities = entities.concat(Generators.Rocks.Generate(512));
-
-			var item = new Item();
-
-			item.X = (Math.floor(Math.random() * 64) - 32) << 4;
-			item.Y = (Math.floor(Math.random() * 64) - 32) << 4;
-
-			entities.push(item);
+			entities = entities.concat(Generators.Rocks.Generate(256));
+			entities = entities.concat(Generators.Items.Generate(4));
 
 			var world = new World();
 
@@ -276,7 +271,7 @@
 
 		//-->
 		</SCRIPT>
-		<TITLE>I Wanna Be The Game: The Movie: The Game: The Book: The Game: The Comic: The Website</TITLE>
+		<TITLE>When Planets Kiss: The Game: The Movie: The Game: The Book: The Game: The Comic: The Website: The Podcast</TITLE>
 	</HEAD>
 	<BODY>
 		<DIV ID="camera"></DIV><!-- end camera -->
