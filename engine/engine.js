@@ -31,6 +31,11 @@ Engine.Cycle = function()
 
 			for(var entity in entities)
 			{
+				if(!entities[entity])
+				{
+					continue;
+				}
+
 				if(!entities[entity].OnCycle)
 				{
 					continue;

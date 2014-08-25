@@ -35,6 +35,11 @@ function Monster()
 
 			this.Direction = directions[direction].ID;
 
+			if(!this.World)
+			{
+				continue;
+			}
+
 			this.World.Entities.Grid.Remove(this);
 			this.X += x;
 			this.Y += y;
