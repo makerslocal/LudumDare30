@@ -82,7 +82,7 @@
 			world.Entities.Add(tree);
 			*/
 				
-			
+			/*
 			//import test
 			jQuery.ajax({
 				url: "http://dev/LudumDare30/world/?89501250231",
@@ -90,28 +90,57 @@
 					world.Zones.Add(world.Entities.Import(x));
 				}, dataType: "text"
 			});
-					
+			*/
 
 			var entities = new Array();
-
 			var player = Generators.Player.Generate();
 
 			var avoid = new Array();
-
 			entities.push(player);
-
-			// entities = entities.concat(Generators.Building.Generate(1)); // Causes an infinite loop.
-
-			entities = entities.concat(Generators.Rocks.Generate(Math.ceil(Math.random() * 256) + 128, avoid));
-			entities = entities.concat(Generators.Forest.Generate(Math.ceil(Math.random() * 2048) + 2048, avoid));
-			entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 128, avoid));
-			entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 256) + 8, avoid));
 
 			var world = new World();
 
-			world.Zones.Add(entities);
+			//maybe let's import local storage?!??!?!?!?!?!??!?!
+			if ( localStorage.getItem("ld30zones.ents") !== null ) {
+				//we have a save in local storage
+				alert("Local storage. " + localStorage["ld30zones.ents"]);
+			} else {
+				alert("No local storage.");
+				localStorage["ld30zones.ents"] = "butts";
 
-			//
+				//generate shit
+				// entities = entities.concat(Generators.Building.Generate(1)); // Causes an infinite loop.
+				entities = entities.concat(Generators.Rocks.Generate(Math.ceil(Math.random() * 256) + 128, avoid));
+				entities = entities.concat(Generators.Forest.Generate(Math.ceil(Math.random() * 2048) + 2048, avoid));
+				entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 2, avoid));
+				entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 256) + 8, avoid));
+
+				world.Zones.Add(entities);
+				world.Zones.Add(Generators.Rocks.Generate(Math.ceil(Math.random() * 16384)));
+				world.Zones.Add(Generators.Forest.Generate(Math.ceil(Math.random() * 16384)));
+			}
+			//and ya done
+			
+			//oh and we also need a way to reset the game
+			var PissOnLocalStorage = function() {
+				if ( confirm("Really?") ) {
+					delete localStorage["ld30zones.ents"];
+					location.reload();
+				}
+				//alert("erased your save.");
+			};
+			
+			//we also should start saving... and I should realy
+			//move these functions into an object some time
+			var SaveToLocalStorage = function() {
+				localStorage["ld30zones.ents"] = world.Entities.Export(2048 <<4, 2048 <<4, 0 <<4, 0 <<4);
+			};
+			var ConstantlyUpdateSave = function() {
+				SaveToLocalStorage();
+				window.setTimeout(function() {
+					ConstantlyUpdateSave();
+				}, 5000); //that's pretty often but whatever
+			};
 
 			document.onkeydown = function(event)
 			{
@@ -125,6 +154,10 @@
 
 			window.onload = function()
 			{
+
+				//start saving... in a bit
+				window.setTimeout(ConstantlyUpdateSave, 5000);
+				
 				document.getElementById("btn-export").onclick = function(e) {
 					//alert(world.Entities.Export(128,128,-64,-64));
 					exported = world.Entities.Export(128<<4,128<<4,0<<4,0<<4);

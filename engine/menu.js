@@ -51,6 +51,7 @@ var Menu = [
 	},
 	{
 		Text : 'Reset Game',
+		Action : function() { PissOnLocalStorage(); }
 	},
 	{
 		Text : 'Fork on GitHub',
