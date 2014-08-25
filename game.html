@@ -61,6 +61,18 @@
 			
 			/*
 			//generate simple setup
+			for ( var i=0; i<128; i++ ) {
+				for ( var j=0; j<128; j++ ) {
+					var tree = new Tree();
+					tree.X = i << 4;
+					tree.Y = j << 4;
+					world.Entities.Add(tree);
+				}
+			}
+			*/
+			
+			/*
+			//generate simpler setup
 			tree = new Tree();
 			tree.X = 16; tree.Y = 32;
 			world.Entities.Add(tree);
@@ -68,6 +80,16 @@
 			tree.X = -32; tree.Y = 16;
 			world.Entities.Add(tree);
 			*/
+				
+			
+			//import test
+			jQuery.ajax({
+				url: "http://dev/LudumDare30/world/?89501250231",
+				success: function(x) {
+					world.Zones.Add(world.Entities.Import(x));
+				}, dataType: "text"
+			});
+					
 
 			var entities = new Array();
 
@@ -104,7 +126,7 @@
 			{
 				document.getElementById("btn-export").onclick = function(e) {
 					//alert(world.Entities.Export(128,128,-64,-64));
-					exported = world.Entities.Export(128,128,-64,-64);
+					exported = world.Entities.Export(128<<4,128<<4,0<<4,0<<4);
 					//jQuery('#qr').html('').qrcode(exported).show();
 					jQuery.ajax({ 
 						type: "POST", url: "./world/",
@@ -230,6 +252,7 @@
 					</UL>
 					
 					<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+						/*
 						document.getElementById("menu_mobile").onchange = function () {
 							alert('changed');
 							if (this.selectedIndex > 1) {
@@ -240,6 +263,7 @@
 								window.location.href = this.value;
 							}
 						}
+						*/
 					</SCRIPT>
 					
 					<SELECT id="menu_mobile">
@@ -251,6 +275,23 @@
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
 		<DIV ID="menu"></DIV>
+		<DIV ID="help">
+			<DIV CLASS="modal"></DIV>
+			<DIV ID="help_text">
+				Welcome to 'When Planets Kiss'<br/>
+				Use 'W' 'A' 'S' 'D' or the Arrows to move.<br/>
+				Press 'SHIFT' while moving to strafe. This is useful for placing things!<br/>
+				Press 'I' or click 'Inventory' to view what items you have. Click or tap on an item to use.<br/>
+				You can use an item by pressing 'SPACE' or tapping on the Action button (on the right).<br/>
+				With tools or weapons selected, Action will destroy the appropriate entity,<br/>
+				and maybe place something in your inventory.<br/>
+				With items selected, Action will place one in the world.<br/>
+				Have fun, and watch out for jellies!<br/>
+				Game created by the people at <a href="http://256.makerslocal.org" target="_blank">Makers Local 256</a> and <a href="http://c63.industries" target="_blank">C63.industries</a>
+				for <a href="http://ludumdare.com" target="_blank">Ludum Dare 30</a>.<br/>
+				Visit the Github link in the menu to learn more, and thanks for playing.
+			</DIV>
+		</DIV>
 		<DIV ID="inventory">
 			<DIV CLASS="modal"></DIV>
 			<DIV ID="inventory_items"></DIV>
