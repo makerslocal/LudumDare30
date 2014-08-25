@@ -82,7 +82,14 @@
 				document.getElementById("btn-export").onclick = function(e) {
 					//alert(world.Entities.Export(128,128,-64,-64));
 					exported = world.Entities.Export(128,128,-64,-64);
-					jQuery('#qr').html('').qrcode(exported).show();
+					//jQuery('#qr').html('').qrcode(exported).show();
+					jQuery.ajax({ 
+						type: "POST", url: "./share/",
+						data: {"zone":exported},
+						success: function(x) {
+							alert(x);
+						}, dataType: "text"
+					});
 
 				};
 
