@@ -35,9 +35,11 @@
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
 
-		var stone = new Items_Stone();
-		Inventory.Add(stone);
-		Inventory.Select(stone);
+		var pickaxe = new Items_Pickaxe();
+		Inventory.Add(pickaxe);
+
+		var axe = new Items_Axe();
+		Inventory.Add(axe);
 
 		<!--
 			var camera = undefined;
@@ -180,10 +182,6 @@
 
 							default:
 								element.style.display = 'none';
-								while(element.firstChild)
-								{
-									element.removeChild(this.Element.firstChild);
-								}
 								Engine.Paused = false;
 								break;
 						}
@@ -300,6 +298,9 @@
 					</NAV>
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
-		<DIV CLASS="modal" ID="inventory"></DIV>
+		<DIV ID="inventory">
+			<DIV CLASS="modal"></DIV>
+			<DIV ID="inventory_items"></DIV>
+		</DIV>
 	</BODY>
 </HTML>

@@ -2,8 +2,7 @@
 * items/stone.js
 */
 
-Items_Stone.prototype = new Items_Item();
-Items_Stone.prototype.constructor = Item;
+Items_Stone.prototype = new Items_Item('Stone');
 
 function Items_Stone()
 {
@@ -42,5 +41,7 @@ function Items_Stone()
 		{
 			return; // No element to render
 		}
+
+		element.appendChild(document.createTextNode('Stone'));
 	}
 }

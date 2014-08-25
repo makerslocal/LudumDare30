@@ -2,8 +2,7 @@
 * items/wood.js
 */
 
-Items_Wood.prototype = new Items_Item();
-Items_Wood.prototype.constructor = Item;
+Items_Wood.prototype = new Items_Item('Wood');
 
 function Items_Wood()
 {
@@ -11,11 +10,14 @@ function Items_Wood()
 	{
 		
 	}
+
 	this.Render = function(element)
 	{
 		if(!element)
 		{
 			return; // No element to render
 		}
+
+		element.appendChild(document.createTextNode('Wood'));
 	}
 }

@@ -2,8 +2,7 @@
 * item.pickaxe.js
 */
 
-Items_Pickaxe.prototype = new Items_Item();
-Items_Pickaxe.prototype.constructor = Item;
+Items_Pickaxe.prototype = new Items_Item('Pickaxe');
 
 function Items_Pickaxe()
 {
@@ -52,5 +51,7 @@ function Items_Pickaxe()
 		{
 			return; // No element to render
 		}
+
+		element.appendChild(document.createTextNode('Pickaxe'));
 	}
 }
