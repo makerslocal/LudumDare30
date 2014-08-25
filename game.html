@@ -23,6 +23,9 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/axe.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/rock.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/pickaxe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
 		<SCRIPT TYPE="text/javascript" SRC="libraries/jquery.min.js"></SCRIPT>
 		<SCRIPT TYPE"text/javascript" SRC="libraries/qrgen/src/jquery.qrcode.js"></SCRIPT>
@@ -31,9 +34,9 @@
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
 
-		var axe = new Items_Axe();
-		Inventory.Add(axe);
-		Inventory.Select(axe);
+		var stone = new Items_Stone();
+		Inventory.Add(stone);
+		Inventory.Select(stone);
 
 		<!--
 			var camera = undefined;
@@ -48,6 +51,16 @@
 				tree.Y = (Math.floor(Math.random() * 128) - 64) << 4;
 
 				world.Entities.Add(tree);
+			}
+
+			for(var i = 0; i < 500; i++)
+			{
+				var rock = new Rock();
+
+				rock.X = (Math.floor(Math.random() * 124) - 64) << 4;
+				rock.Y = (Math.floor(Math.random() * 128) - 64) << 4;
+
+				world.Entities.Add(rock);
 			}
 			
 			/*

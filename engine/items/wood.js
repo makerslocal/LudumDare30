@@ -1,5 +1,5 @@
 /*
-* item.wood.js
+* items/wood.js
 */
 
 Items_Wood.prototype = new Items_Item();
