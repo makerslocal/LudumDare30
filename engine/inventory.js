@@ -31,6 +31,11 @@ Inventory.Contains = function(item)
 		return false;
 	}
 
+	if(!item.Name)
+	{
+		return !!this.__Items[item];
+	}
+
 	if(!this.__Items[item.Name])
 	{
 		return false;
@@ -127,6 +132,23 @@ Inventory.Remove = function(item)
 		return;
 	}
 
+	if(!item.Name)
+	{
+		if(!this.__Items[item])
+		{
+			return;
+		}
+
+		this.__Items[item].pop();
+
+		if(this.__Items[item].length < 1)
+		{
+			delete this.__Items[item];
+		}
+
+		return;
+	}
+
 	if(!this.__Items[item.Name])
 	{
 		return;
@@ -169,3 +191,29 @@ Inventory.Select = function(item)
 
 	this.__Item = item;
 };
+
+
+Engine.AddListener(function(cycles)
+{
+	if(Controls.Get(Enums.Controls.Inventory))
+	{
+		var element = document.getElementById('inventory');
+
+		if(element)
+		{
+			switch(element.style.display)
+			{
+				case 'none':
+					Engine.Paused = true;
+					Inventory.Render(element);
+					element.style.display = 'block';
+					break;
+
+				default:
+					element.style.display = 'none';
+					Engine.Paused = false;
+					break;
+			}
+		}
+	}
+});

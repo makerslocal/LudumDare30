@@ -11,26 +11,40 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/style.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/entity.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/projectile.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/arrow.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/floor.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/item.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/arrow.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/axe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/bow.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/pickaxe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/sword.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/monster.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/rock.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/snake.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/jelly.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/tree.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/item.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/building.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/forest.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/items.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/monsters.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/rocks.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/arrow.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/axe.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/bow.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/pickaxe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/sword.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/stone.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/menu.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
@@ -39,13 +53,6 @@
 		<SCRIPT TYPE="text/javascript" SRC="libraries/qrgen/src/qrcode.js"></SCRIPT>
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
-
-		var pickaxe = new Items_Pickaxe();
-		Inventory.Add(pickaxe);
-
-		var axe = new Items_Axe();
-		Inventory.Add(axe);
-
 		<!--
 			var camera = undefined;
 
@@ -54,6 +61,18 @@
 			
 			/*
 			//generate simple setup
+			for ( var i=0; i<128; i++ ) {
+				for ( var j=0; j<128; j++ ) {
+					var tree = new Tree();
+					tree.X = i << 4;
+					tree.Y = j << 4;
+					world.Entities.Add(tree);
+				}
+			}
+			*/
+			
+			/*
+			//generate simpler setup
 			tree = new Tree();
 			tree.X = 16; tree.Y = 32;
 			world.Entities.Add(tree);
@@ -61,23 +80,35 @@
 			tree.X = -32; tree.Y = 16;
 			world.Entities.Add(tree);
 			*/
+				
+			
+			//import test
+			jQuery.ajax({
+				url: "http://dev/LudumDare30/world/?89501250231",
+				success: function(x) {
+					world.Zones.Add(world.Entities.Import(x));
+				}, dataType: "text"
+			});
+					
 
 			var entities = new Array();
 
 			var player = Generators.Player.Generate();
 
+			var avoid = new Array();
+
 			entities.push(player);
 
-			entities = entities.concat(Generators.Forest.Generate(4096));
-			entities = entities.concat(Generators.Rocks.Generate(256));
-			entities = entities.concat(Generators.Items.Generate(4));
+			// entities = entities.concat(Generators.Building.Generate(1)); // Causes an infinite loop.
+
+			entities = entities.concat(Generators.Rocks.Generate(Math.ceil(Math.random() * 256) + 128, avoid));
+			entities = entities.concat(Generators.Forest.Generate(Math.ceil(Math.random() * 2048) + 2048, avoid));
+			entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 128, avoid));
+			entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 256) + 8, avoid));
 
 			var world = new World();
 
 			world.Zones.Add(entities);
-
-			world.Zones.Add(Generators.Rocks.Generate(1024));
-			world.Zones.Add(Generators.Forest.Generate(1024));
 
 			//
 
@@ -95,7 +126,7 @@
 			{
 				document.getElementById("btn-export").onclick = function(e) {
 					//alert(world.Entities.Export(128,128,-64,-64));
-					exported = world.Entities.Export(128,128,-64,-64);
+					exported = world.Entities.Export(128<<4,128<<4,0<<4,0<<4);
 					//jQuery('#qr').html('').qrcode(exported).show();
 					jQuery.ajax({ 
 						type: "POST", url: "./world/",
@@ -183,92 +214,6 @@
 				camera.OnResize(event);
 			}
 
-			Engine.AddListener(function(cycles)
-			{
-				if(Controls.Get(Enums.Controls.Inventory))
-				{
-					var element = document.getElementById('inventory');
-
-					if(element)
-					{
-						switch(element.style.display)
-						{
-							case 'none':
-								Engine.Paused = true;
-								Inventory.Render(element);
-								element.style.display = 'block';
-								break;
-
-							default:
-								element.style.display = 'none';
-								Engine.Paused = false;
-								break;
-						}
-					}
-				}
-
-				if(Engine.Paused)
-				{
-					return;
-				}
-
-				if(Controls.Get(Enums.Controls.Action))
-				{
-					Inventory.OnAction();
-				}
-
-				var x = 0;
-				var y = 0;
-
-				for(var direction in Enums.Directions)
-				{
-					if(!direction)
-					{
-						continue;
-					}
-
-					if(!Enums.Controls[direction])
-					{
-						continue;
-					}
-
-					if(!Controls.Get(Enums.Controls[direction]))
-					{
-						continue;
-					}
-
-					x += Enums.Directions[direction].X * player.Width;
-					y += Enums.Directions[direction].Y * player.Height;
-
-					player.Direction = direction;
-				}
-
-				if(player.Scan(x, y))
-				{
-					x = 0;
-					y = 0;
-				}
-				else
-				{
-					// Remove old player object
-					player.World.Entities.Grid.Remove(player);
-					player.X += x; // Update player obj coords
-					player.Y += y; // ditto ^
-					// Create new player obj in updated location
-					player.World.Entities.Grid.Add(player);
-				}
-
-				if(!camera)
-				{
-					return; // No camera, can't render
-				}
-
-				camera.X += x; // Adjust center of screen to track player
-				camera.Y += y; // ditto ^
-
-				camera.Render(world);
-			});
-
 		//-->
 		</SCRIPT>
 		<TITLE>When Planets Kiss: The Game: The Movie: The Game: The Book: The Game: The Comic: The Website: The Podcast</TITLE>
@@ -307,6 +252,7 @@
 					</UL>
 					
 					<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+						/*
 						document.getElementById("menu_mobile").onchange = function () {
 							alert('changed');
 							if (this.selectedIndex > 1) {
@@ -317,6 +263,7 @@
 								window.location.href = this.value;
 							}
 						}
+						*/
 					</SCRIPT>
 					
 					<SELECT id="menu_mobile">
@@ -328,6 +275,23 @@
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
 		<DIV ID="menu"></DIV>
+		<DIV ID="help">
+			<DIV CLASS="modal"></DIV>
+			<DIV ID="help_text">
+				Welcome to 'When Planets Kiss'<br/>
+				Use 'W' 'A' 'S' 'D' or the Arrows to move.<br/>
+				Press 'SHIFT' while moving to strafe. This is useful for placing things!<br/>
+				Press 'I' or click 'Inventory' to view what items you have. Click or tap on an item to use.<br/>
+				You can use an item by pressing 'SPACE' or tapping on the Action button (on the right).<br/>
+				With tools or weapons selected, Action will destroy the appropriate entity,<br/>
+				and maybe place something in your inventory.<br/>
+				With items selected, Action will place one in the world.<br/>
+				Have fun, and watch out for jellies!<br/>
+				Game created by the people at <a href="http://256.makerslocal.org" target="_blank">Makers Local 256</a> and <a href="http://c63.industries" target="_blank">C63.industries</a>
+				for <a href="http://ludumdare.com" target="_blank">Ludum Dare 30</a>.<br/>
+				Visit the Github link in the menu to learn more, and thanks for playing.
+			</DIV>
+		</DIV>
 		<DIV ID="inventory">
 			<DIV CLASS="modal"></DIV>
 			<DIV ID="inventory_items"></DIV>

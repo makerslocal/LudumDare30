@@ -4,16 +4,16 @@ var Enums = {
 
 		Action : {
 			KeyCodes : [
-				69, // E
 				32, // Spacebar
+				69, // E
 			],
 			ID : 'action',
 		},
 
 		Down : {
 			KeyCodes  : [
-				83, // S
 				40, // Down,
+				83, // S
 				98, // Down (numberpad)
 			],
 			ID : 'down',
@@ -21,16 +21,16 @@ var Enums = {
 
 		Inventory : {
 			KeyCodes : [
+				9,  // Tab
 				73, // I
-				16, // Shift
 			],
 			ID : 'inventory',
 		},
 
 		Left : {
 			KeyCodes  : [
-				65,  // A
 				37,  // Left,
+				65,  // A
 				100, // Left (numberpad)
 			],
 			ID : 'left',
@@ -38,17 +38,24 @@ var Enums = {
 
 		Right : {
 			KeyCodes  : [
-				68,  // D
 				39,  // Right,
+				68,  // D
 				102, // Right (numberpad)
 			],
 			ID : 'right',
 		},
 
+		Strafe : {
+			KeyCodes : [
+				16, // Shift
+			],
+			ID : 'strafe',
+		},
+
 		Up : {
 			KeyCodes  : [
-				87,  // W
 				38,  // Up,
+				87,  // W
 				104, // Up (numberpad)
 			],
 			ID : 'up',
@@ -81,4 +88,14 @@ var Enums = {
 			Y  : -1,
 		},
 	},
+	
+	Entities : {
+		
+		Tree : { ID : 0x1 },
+		Floor : { ID : 0x2 },
+		Stone : { ID : 0x3 },
+		Wood : { ID : 0x4 },
+
+	},
+		
 };

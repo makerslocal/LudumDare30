@@ -1,11 +1,12 @@
 Wood.prototype = new Entity();
-Wood.prototype.constructor = Entity;
 
 function Wood()
 {
-	this.Style.Background.Image = 'sprites/spritesheet_tools-set.png';
-	this.Style.Background.Position.X = -32;
-	this.Style.Background.Position.Y = -0;
+	Entity.apply(this, arguments);
+
+	this.Style.Background.Image = 'sprites.png';
+	this.Style.Background.Position.X = -(208 + (Math.floor(Math.random() * 2) << 4));
+	this.Style.Background.Position.Y = -1456;
 
 	this.Collide = function(entity)
 	{

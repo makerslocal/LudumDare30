@@ -1,8 +1,9 @@
 Grass.prototype = new Entity();
-Grass.prototype.constructor = Entity;
 
 function Grass()
 {
+	Entity.apply(this, arguments);
+
 	this.Render = function(element)
 	{
 		if(!element)

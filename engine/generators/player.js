@@ -2,12 +2,12 @@ var Generators = Generators || new Object();
 
 Generators.Player = {
 
-	Generate : function(x, y)
+	Generate : function(avoid)
 	{
 		var entity = new Player();
 
-		entity.X = x || 64 << 4;
-		entity.Y = y || 64 << 4;
+		entity.X = 64 << 4;
+		entity.Y = 64 << 4;
 
 		return entity;
 	}

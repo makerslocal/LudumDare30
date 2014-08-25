@@ -52,6 +52,43 @@ div.modal
 	z-index: -1;
 }
 
+div#help
+{
+	display: none;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+}
+
+div#help div#help_text
+{
+	border-color: silver;
+	border-style: solid;
+	border-width: 10px;
+	color: silver;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 32px;
+	font-weight: bold;
+	height: 100%;
+	padding: 64px;
+	position: static;
+	text-align: center;
+	width: 100%;
+}
+
+div#help div#help_text a
+{
+	color: silver;
+}
+
+div#help div#help_text a:hover
+{
+	color: red;
+}
+
 div#inventory
 {
 	display: none;
@@ -59,7 +96,7 @@ div#inventory
 	position: absolute;
 	top: 0;
 	width: 100%;
-	z-index: 3;
+	z-index: 2;
 }
 div#inventory div#inventory_items
 {
@@ -81,7 +118,7 @@ div#inventory div#inventory_items div.item
 	padding: 2px;
 	position: static;
 	text-align: center;
-	vertical-align: middle;;
+	vertical-align: middle;
 	width: 128px;
 }
 
@@ -96,7 +133,7 @@ div#menu
 	position: absolute;
 	top: 0;
 	width: 100%;
-	z-index: 2;
+	z-index: 3;
 }
 
 div#menu div
@@ -110,6 +147,7 @@ div#menu div
 	width: 128px;
 }
 
+div#menu div:active,
 div#menu div:hover
 {
 	background-color: #333;
@@ -148,9 +186,9 @@ div#overlay div#overlay_buttons
 div#overlay div#overlay_buttons div
 {
 	bottom: 0;
-	height: 256px;
+	height: 1in;
 	right: 0;
-	width: 256px;
+	width: 1in;
 }
 
 div#overlay div#overlay_buttons div#overlay_control_action
@@ -217,10 +255,10 @@ div#overlay_menu ul li > a {
 div#overlay div#overlay_dpad
 {
 	bottom: 0;
-	height: 256px;
+	height: 2in;
 	left: 64px;
 	position: absolute;
-	width: 256px;
+	width: 2in;
 }
 
 div#overlay div#overlay_dpad div#overlay_control_down
@@ -305,5 +343,3 @@ div#share {
 	text-align:center;
 	border:16px solid black;
 }
-
-

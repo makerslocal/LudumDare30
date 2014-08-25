@@ -1,7 +1,7 @@
-##Welcome to the ML256 Lundum Dare 30 Project
+##When Planets Kiss: The Game: The Movie: The Game: The Book: The Game: The Comic: The Readme
 
 
-(there's no title yet, fo sho)
+###Welcome to the ML256 Lundum Dare 30 Project
 
 
 We are entering a mobile web game to the Ludum Dare #30 game creation competition.

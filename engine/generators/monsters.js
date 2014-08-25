@@ -1,6 +1,6 @@
 var Generators = Generators || new Object();
 
-Generators.Rocks = {
+Generators.Monsters = {
 
 	Generate : function(count, avoid)
 	{
@@ -29,12 +29,23 @@ Generators.Rocks = {
 			x = x << 4;
 			y = y << 4;
 
-			var rock = new Rock();
+			var entity = undefined;
 
-			rock.X = x;
-			rock.Y = y;
+			switch(count % 2)
+			{
+				case 0:
+					entity = new Jelly();
+					break;
 
-			entities.push(rock);
+				case 1:
+					entity = new Snake();
+					break;
+			}
+
+			entity.X = x;
+			entity.Y = y;
+
+			entities.push(entity);
 
 			if(!avoid[x])
 			{

@@ -1,8 +1,9 @@
 Floor.prototype = new Entity();
-Floor.prototype.constructor = Entity;
 
 function Floor()
 {
+	Entity.apply(this, arguments);
+
 	this.Render = function(element)
 	{
 		if(!element)
