@@ -70,8 +70,6 @@ function Zones(world)
 
 		zones[x][y] = true;
 
-		console.log([x,y]);
-
 		x = x << size;
 		y = y << size;
 

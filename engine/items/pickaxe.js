@@ -32,12 +32,12 @@ function Items_Pickaxe()
 		{
 			var entity = entities[i];
 
-			if (!(entity instanceof Rock) || !(entity instanceof Stone))
+			if (!(entity instanceof Rock) && !(entity instanceof Stone))
 			{
 				continue;
 			}
 
-			Inventory.Add(new Stone());
+			Inventory.Add(new Items_Stone());
 
 			entity.World.Entities.Remove(entity);
 

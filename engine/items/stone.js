@@ -33,6 +33,8 @@ function Items_Stone()
 		entity.Y = y;
 
 		player.World.Entities.Add(entity);
+
+		Inventory.Remove(this);
 	}
 
 	this.Render = function(element)
