@@ -149,9 +149,9 @@ div#overlay div#overlay_buttons
 div#overlay div#overlay_buttons div
 {
 	bottom: 0;
-	height: 256px;
+	height: 1in;
 	right: 0;
-	width: 256px;
+	width: 1in;
 }
 
 div#overlay div#overlay_buttons div#overlay_control_action
@@ -218,10 +218,10 @@ div#overlay_menu ul li > a {
 div#overlay div#overlay_dpad
 {
 	bottom: 0;
-	height: 256px;
+	height: 2in;
 	left: 64px;
 	position: absolute;
-	width: 256px;
+	width: 2in;
 }
 
 div#overlay div#overlay_dpad div#overlay_control_down
