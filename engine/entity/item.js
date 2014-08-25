@@ -7,9 +7,9 @@ Item.prototype.constructor = Entity;
 
 function Item()
 {
-	this.Style.Background.Image = 'sprites/spritesheet_use.png';
-	this.Style.Background.Position.X = -432;
-	this.Style.Background.Position.Y = -480;
+	this.Style.Background.Image = 'sprites/spritesheet_tools-set.png';
+	this.Style.Background.Position.X = -16;
+	this.Style.Background.Position.Y = -0;
 
 	this.OnPickup = undefined;
 

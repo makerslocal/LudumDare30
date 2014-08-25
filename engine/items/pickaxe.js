@@ -32,7 +32,7 @@ function Items_Pickaxe()
 		{
 			var entity = entities[i];
 
-			if (!(entity instanceof Rock))
+			if (!(entity instanceof Rock) || !(entity instanceof Stone))
 			{
 				continue;
 			}
