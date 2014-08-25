@@ -61,6 +61,7 @@ div#overlay
 	bottom: 64px;
 	position: absolute;
 	width: 100%;
+	height: 100%;
 	z-index: 1;
 }
 
@@ -98,6 +99,59 @@ div#overlay div#overlay_buttons div#overlay_control_action
 	bottom: 0;
 	right: 0;
 }
+
+
+
+div#overlay div#overlay_menu
+{
+	/* cancells the absolute positioning on the div#overlay item */
+	top: 64px; 
+	left: 200px;
+	position: absolute;
+	width: 400px;
+	height: 30px;
+}
+
+div#overlay_menu select {
+  display: none;
+}
+
+div#overlay_menu ul {
+	text-align: center;
+	padding-top: 3px;
+	background-color: white;
+	opacity: 0.6;
+}
+
+div#overlay_menu ul:hover {
+	background-color: white;
+	opacity: 1.0;
+}
+
+div#overlay_menu ul li {
+	display: inline;
+	opacity: 1.0;
+	background-color: none;
+}
+
+div#overlay_menu ul li:hover {
+	background-color: white;
+}
+
+div#overlay_menu ul a {
+	display: inline;
+	text-decoration: none;
+	opacity: 1.0;
+	color: #000000;
+}
+
+@media (max-width: 960px) {
+  div#overlay_menu ul     { display: none; }
+  div#overlay_menu select { display: inline-block; }
+}
+
+
+
 
 div#overlay div#overlay_dpad
 {

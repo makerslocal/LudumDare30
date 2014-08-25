@@ -13,15 +13,17 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/tree.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/item.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
-		<script language="javascript" src="libraries/binascii.js"></script>
-		<script type="text/javascript" src="libraries/jquery.min.js"></script>
-		<script type="text/javascript" src="libraries/qrgen/src/jquery.qrcode.js"></script>
-		<script type="text/javascript" src="libraries/qrgen/src/qrcode.js"></script>
+		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" SRC="libraries/jquery.min.js"></SCRIPT>
+		<SCRIPT TYPE"text/javascript" SRC="libraries/qrgen/src/jquery.qrcode.js"></SCRIPT>
+		<SCRIPT TYPE="text/javascript" SRC="libraries/qrgen/src/qrcode.js"></SCRIPT>
 
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
@@ -34,7 +36,7 @@
 			{
 				var tree = new Tree();
 
-				tree.X = (Math.floor(Math.random() * 128) - 64) << 4;
+				tree.X = (Math.floor(Math.random() * 124) - 64) << 4;
 				tree.Y = (Math.floor(Math.random() * 128) - 64) << 4;
 
 				world.Entities.Add(tree);
@@ -57,6 +59,13 @@
 
 			world.Entities.Add(player);
 
+			var item = new Item();
+
+			item.X = (Math.floor(Math.random() * 64) - 32) << 4;
+			item.Y = (Math.floor(Math.random() * 64) - 32) << 4;
+
+			world.Entities.Add(item);
+
 			//
 
 			document.onkeydown = function(event)
@@ -77,6 +86,13 @@
 					jQuery('#qr').html('').qrcode(exported).show();
 
 				};
+				document.getElementById("btn-export-mobile").onclick = function(e) {
+					//alert(world.Entities.Export(128,128,-64,-64));
+					exported = world.Entities.Export(128,128,-64,-64);
+					jQuery('#qr').html('').qrcode(exported).show();
+
+				};
+				
 
 				for(var control in Enums.Controls)
 				{
@@ -216,25 +232,52 @@
 
 		//-->
 		</SCRIPT>
-		<TITLE>I Wanna Be The Game: The Movie: The Game: The Game</TITLE>
+		<TITLE>I Wanna Be The Game: The Movie: The Game: The Book: The Game: The Comic: The Website</TITLE>
 	</HEAD>
 	<BODY>
-		<div id="debug">
-			<input type="button" id="btn-export" value="export">
-			<div id="qr"></div>
-		</div>
-		<DIV ID="camera"></DIV>
+		<DIV ID="camera"></DIV><!-- end camera -->
+
 		<DIV ID="overlay">
+			<div id="debug" style="position: absolute; top: 70px;"><div id="qr"></div></div>
 			<DIV ID="overlay_dpad">
 				<DIV CLASS="button" ID="overlay_control_up"></DIV>
 				<DIV CLASS="button" ID="overlay_control_left"></DIV>
 				<DIV CLASS="button" ID="overlay_control_right"></DIV>
 				<DIV CLASS="button" ID="overlay_control_down"></DIV>
-			</DIV>
+			</DIV><!-- end overlay_dpad -->
+			
 			<DIV ID="overlay_buttons">
 				<DIV CLASS="button" ID="overlay_control_action"></DIV>
-			</DIV>
-		</DIV>
+			</DIV><!-- end overlay_buttons -->
+			
+			<DIV ID="overlay_menu">
+					<NAV> 
+					<UL id="menu_desktop"> 
+					<LI><a id="btn-export" href="#">Export</a></LI> 
+					<LI><A href="https://github.com/makerslocal/LudumDare30" target="new">Github</A></LI>
+					</UL>
+					
+					<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+						document.getElementById("menu_mobile").onchange = function () {
+							alert('changed');
+							if (this.selectedIndex > 1) {
+								window.location.href = this.value;
+							}
+							if (this.selectedIndex == 1) {
+								alert('here');
+								window.location.href = this.value;
+							}
+						}
+					</SCRIPT>
+					
+					<SELECT id="menu_mobile">
+					<OPTION value="#" selected="selected">Menu</OPTION> 
+					<OPTION value="#" id="btn-export-mobile">Export</OPTION> 
+					<OPTION value="https://github.com/makerslocal/LudumDare30">Github</OPTION>
+					</SELECT>
+					</NAV>
+			</DIV><!-- end #overlay_menu -->
+		</DIV><!-- end #overlay -->
 		<DIV CLASS="modal" ID="inventory"></DIV>
 	</BODY>
 </HTML>
