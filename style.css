@@ -110,6 +110,7 @@ div#menu div
 	width: 128px;
 }
 
+div#menu div:active,
 div#menu div:hover
 {
 	background-color: #333;
@@ -305,5 +306,3 @@ div#share {
 	text-align:center;
 	border:16px solid black;
 }
-
-
