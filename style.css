@@ -57,7 +57,6 @@ div#help
 	display: none;
 	height: 100%;
 	position: absolute;
-	text-align: center;
 	top: 0;
 	width: 100%;
 	z-index: 2;
@@ -65,9 +64,29 @@ div#help
 
 div#help div#help_text
 {
+	border-color: silver;
+	border-style: solid;
+	border-width: 10px;
+	color: silver;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 32px;
+	font-weight: bold;
 	height: 100%;
 	padding: 64px;
+	position: static;
+	text-align: center;
 	width: 100%;
+}
+
+div#help div#help_text a
+{
+	color: silver;
+}
+
+div#help div#help_text a:hover
+{
+	color: red;
 }
 
 div#inventory
@@ -99,7 +118,7 @@ div#inventory div#inventory_items div.item
 	padding: 2px;
 	position: static;
 	text-align: center;
-	vertical-align: middle;;
+	vertical-align: middle;
 	width: 128px;
 }
 
