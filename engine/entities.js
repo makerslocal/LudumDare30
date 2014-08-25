@@ -24,6 +24,8 @@ function Entities(world)
 		entity.World = this.World;
 
 		this.Grid.Add(entity);
+
+		this.World.IsDirty = true;
 	};
 
 	this.Contains = function(entity)
@@ -76,6 +78,8 @@ function Entities(world)
 		}
 
 		entity.World = undefined;
+
+		this.World.IsDirty = true;
 	};
 
 	this.Import = function(data) {
