@@ -18,6 +18,7 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/rock.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/snake.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/jelly.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/tree.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
@@ -83,7 +84,7 @@
 			entities = entities.concat(Generators.Forest.Generate(Math.ceil(Math.random() * 2048) + 2048), avoid);
 			entities = entities.concat(Generators.Rocks.Generate(Math.ceil(Math.random() * 256) + 128), avoid);
 			entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 2), avoid);
-			entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 16) + 8), avoid);
+			entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 256) + 8), avoid);
 
 			var world = new World();
 
