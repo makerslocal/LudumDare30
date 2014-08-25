@@ -63,6 +63,18 @@
 			
 			/*
 			//generate simple setup
+			for ( var i=0; i<128; i++ ) {
+				for ( var j=0; j<128; j++ ) {
+					var tree = new Tree();
+					tree.X = i << 4;
+					tree.Y = j << 4;
+					world.Entities.Add(tree);
+				}
+			}
+			*/
+			
+			/*
+			//generate simpler setup
 			tree = new Tree();
 			tree.X = 16; tree.Y = 32;
 			world.Entities.Add(tree);
@@ -70,6 +82,16 @@
 			tree.X = -32; tree.Y = 16;
 			world.Entities.Add(tree);
 			*/
+				
+			
+			//import test
+			jQuery.ajax({
+				url: "http://dev/LudumDare30/world/?89501250231",
+				success: function(x) {
+					world.Zones.Add(world.Entities.Import(x));
+				}, dataType: "text"
+			});
+					
 
 			var entities = new Array();
 
@@ -109,7 +131,7 @@
 			{
 				document.getElementById("btn-export").onclick = function(e) {
 					//alert(world.Entities.Export(128,128,-64,-64));
-					exported = world.Entities.Export(128,128,-64,-64);
+					exported = world.Entities.Export(128<<4,128<<4,0<<4,0<<4);
 					//jQuery('#qr').html('').qrcode(exported).show();
 					jQuery.ajax({ 
 						type: "POST", url: "./world/",
@@ -235,6 +257,7 @@
 					</UL>
 					
 					<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+						/*
 						document.getElementById("menu_mobile").onchange = function () {
 							alert('changed');
 							if (this.selectedIndex > 1) {
@@ -245,6 +268,7 @@
 								window.location.href = this.value;
 							}
 						}
+						*/
 					</SCRIPT>
 					
 					<SELECT id="menu_mobile">
