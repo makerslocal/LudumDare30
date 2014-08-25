@@ -19,6 +19,14 @@ var Enums = {
 			ID : 'down',
 		},
 
+		Inventory : {
+			KeyCodes : [
+				73, // I
+				16, // Shift
+			],
+			ID : 'inventory',
+		},
+
 		Left : {
 			KeyCodes  : [
 				65,  // A

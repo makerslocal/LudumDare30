@@ -5,6 +5,7 @@
 		<META CONTENT="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" NAME="viewport" />
 		<SCRIPT LANGUAGE="javascript" SRC="engine/enumerators.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/engine.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/inventory.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/style.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/entity.js" TYPE="text/javascript"></SCRIPT>
@@ -139,8 +140,44 @@
 				camera.OnResize(event);
 			}
 
-			Engine.AddListener(function()
+			Engine.AddListener(function(cycles)
 			{
+				if(Controls.Get(Enums.Controls.Inventory))
+				{
+					var element = document.getElementById('inventory');
+
+					if(element)
+					{
+						switch(element.style.display)
+						{
+							case 'none':
+								Engine.Paused = true;
+								Inventory.Render(element);
+								element.style.display = 'block';
+								break;
+
+							default:
+								element.style.display = 'none';
+								while(element.firstChild)
+								{
+									element.removeChild(this.Element.firstChild);
+								}
+								Engine.Paused = false;
+								break;
+						}
+					}
+				}
+
+				if(Engine.Paused)
+				{
+					return;
+				}
+
+				if(Controls.Get(Enums.Controls.Action))
+				{
+					Inventory.OnAction();
+				}
+
 				var x = 0;
 				var y = 0;
 
@@ -169,15 +206,18 @@
 
 				if(player.Scan(x, y))
 				{
-					return;
+					x = 0;
+					y = 0;
 				}
-
-				// Remove old player object
-				player.World.Entities.Grid.Remove(player);
-				player.X += x; // Update player obj coords
-				player.Y += y; // ditto ^
-				// Create new player obj in updated location
-				player.World.Entities.Grid.Add(player);
+				else
+				{
+					// Remove old player object
+					player.World.Entities.Grid.Remove(player);
+					player.X += x; // Update player obj coords
+					player.Y += y; // ditto ^
+					// Create new player obj in updated location
+					player.World.Entities.Grid.Add(player);
+				}
 
 				if(!camera)
 				{
@@ -238,5 +278,6 @@
 					</NAV>
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
+		<DIV CLASS="modal" ID="inventory"></DIV>
 	</BODY>
 </HTML>

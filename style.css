@@ -33,6 +33,29 @@ div#camera
 	z-index: 0;
 }
 
+div.modal
+{
+	background-color: black;
+	display: none;
+	height: 100%;
+	opacity: 0.5;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 20;
+}
+
+div#menu
+{
+	background-color: #FF9999;
+	height: 100px;
+	width: 400px;
+	z-index: 10;
+	position: absolute;
+	visibility: hidden;
+	
+}
+
 div#overlay
 {
 	bottom: 64px;
