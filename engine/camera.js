@@ -41,11 +41,6 @@ function Camera(element)
 			return;
 		}
 
-		while(this.Element.firstChild)
-		{
-			this.Element.removeChild(this.Element.firstChild);
-		}
-
 		var height = this.Height >> this.Scale;
 		var width  = this.Width >> this.Scale;
 		
@@ -71,7 +66,27 @@ function Camera(element)
 			return;
 		}
 
-		var canvas = document.createElement('canvas');
+		var canvas;
+
+		if(this.Element.firstChild)
+		{
+			if(this.Element.firstChild.nodeName != 'CANVAS')
+			{
+				while(this.Element.firstChild)
+				{
+					this.Element.removeChild(this.Element.firstChild);
+				}
+			}
+			else
+			{
+				canvas = this.Element.firstChild;
+			}
+		}
+
+		if(!canvas)
+		{
+			canvas = document.createElement('canvas');
+		}
 
 		var context;
 
@@ -81,6 +96,8 @@ function Camera(element)
 			canvas.setAttribute('width',  width);
 
 			context = canvas.getContext('2d');
+
+			context.clearRect (0, 0, width, height);
 		}
 
 		var zones = world.Zones.List();
@@ -175,8 +192,15 @@ function Camera(element)
 			return;
 		}
 
+		while(this.Element.firstChild)
+		{
+			this.Element.removeChild(this.Element.firstChild);
+		}
+
 		this.Element.style.height = this.Height + 'px';
 		this.Element.style.width  = this.Width  + 'px';
+
+		this.Render(world);
 	};
 
 	this.OnResize(undefined);
