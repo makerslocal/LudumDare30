@@ -2,8 +2,7 @@
 * item.axe.js
 */
 
-Items_Axe.prototype = new Items_Item();
-Items_Axe.prototype.constructor = Item;
+Items_Axe.prototype = new Items_Item('Axe');
 
 function Items_Axe()
 {
@@ -52,5 +51,7 @@ function Items_Axe()
 		{
 			return; // No element to render
 		}
+
+		element.appendChild(document.createTextNode('Axe'));
 	}
 }

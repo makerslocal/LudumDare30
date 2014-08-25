@@ -36,9 +36,11 @@
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
 
-		var wood = new Items_Wood();
-		Inventory.Add(wood);
-		Inventory.Select(wood);
+		var pickaxe = new Items_Pickaxe();
+		Inventory.Add(pickaxe);
+
+		var axe = new Items_Axe();
+		Inventory.Add(axe);
 
 		<!--
 			var camera = undefined;
@@ -190,10 +192,6 @@
 
 							default:
 								element.style.display = 'none';
-								while(element.firstChild)
-								{
-									element.removeChild(this.Element.firstChild);
-								}
 								Engine.Paused = false;
 								break;
 						}
@@ -320,6 +318,9 @@
 					</NAV>
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
-		<DIV CLASS="modal" ID="inventory"></DIV>
+		<DIV ID="inventory">
+			<DIV CLASS="modal"></DIV>
+			<DIV ID="inventory_items"></DIV>
+		</DIV>
 	</BODY>
 </HTML>
