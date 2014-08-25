@@ -1,9 +1,8 @@
-function Building()
-{
-    build: null;
-    build_size: 32;
-    rooms: [];
-    function Generate() {
+var Building = {
+    build: null,
+    build_size: 32,
+    rooms: [],
+    Generate: function () {
         this.build = [];
         for (var x = 0; x < this.build_size; x++) {
             this.build[x] = [];
@@ -87,9 +86,9 @@ function Building()
                 }
             }
         }
-    };
+    },
         
-    function FindClosestRoom(room) {
+    FindClosestRoom: function (room) {
         var mid = {
             x: room.x + (room.w / 2),
             y: room.y + (room.h / 2)
@@ -110,8 +109,8 @@ function Building()
             }
         }
         return closest;
-    };
-    function SquashRooms() {
+    },
+    SquashRooms: function () {
         for (var i = 0; i < 10; i++) {
             for (var j = 0; j < this.rooms.length; j++) {
                 var room = this.rooms[j];
@@ -131,8 +130,8 @@ function Building()
                 }
             }
         }
-    };
-    function DoesCollide(room, ignore) {
+    },
+    DoesCollide: function (room, ignore) {
         for (var i = 0; i < this.rooms.length; i++) {
             if (i == ignore) continue;
             var check = this.rooms[i];
@@ -141,7 +140,7 @@ function Building()
 
         return false;
     }
-};
+}
 
 var Renderer = {
     //canvas: null,
@@ -155,15 +154,21 @@ var Renderer = {
     //    this.ctx = canvas.getContext('2d');
     //    this.scale = this.canvas.width / Building.build_size;
     //},
-    Update: function () {
+    Update: function (offsetX, offsetY, world) {
         for (var y = 0; y < Building.build_size; y++) {
             for (var x = 0; x < Building.build_size; x++) {
                 var tile = Building.build[x][y];
-                if (tile == 0) this.ctx.fillStyle = '#64908A';
-                else if (tile == 1) this.ctx.fillStyle = '#351330';
-                else if (tile == 3) this.ctx.fillStyle = '#666666';
-                else this.World.Entities.Add(wood); //this.ctx.fillStyle = '#424254';
-                this.ctx.fillRect(x * this.scale, y * this.scale, this.scale, this.scale);
+                if (tile == 0); //this.ctx.fillStyle = '#64908A';
+                else if (tile == 1); //this.ctx.fillStyle = '#351330';
+                else if (tile == 3); //this.ctx.fillStyle = '#666666';
+                else //this.ctx.fillStyle = '#424254';
+                {
+                    var wood = new Wood();
+                    wood.X = (x << 4) + offsetX;
+                    wood.Y = (y << 4) + offsetY;
+                    world.Entities.Add(wood);
+                }
+                //this.ctx.fillRect(x * this.scale, y * this.scale, this.scale, this.scale);
             }
         }
     }
@@ -177,4 +182,4 @@ var Helpers = {
 
 //Building.Generate();
 //Renderer.Initialize();
-Renderer.Update(Building.build);
+//Renderer.Update(Building.build);
