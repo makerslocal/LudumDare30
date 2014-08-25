@@ -96,14 +96,15 @@
 			var player = Generators.Player.Generate();
 
 			var avoid = new Array();
-			entities.push(player);
+			//entities.push(player);
 
 			var world = new World();
 
 			//maybe let's import local storage?!??!?!?!?!?!??!?!
 			if ( localStorage.getItem("ld30zones.ents") !== null ) {
 				//we have a save in local storage
-				alert("Local storage. " + localStorage["ld30zones.ents"]);
+				alert("Local storage. ");// + localStorage["ld30zones.ents"]);
+				world.Zones.Add(world.Entities.Import(localStorage["ld30zones.ents"]));
 			} else {
 				alert("No local storage.");
 				localStorage["ld30zones.ents"] = "butts";
@@ -119,6 +120,7 @@
 				world.Zones.Add(Generators.Rocks.Generate(Math.ceil(Math.random() * 16384)));
 				world.Zones.Add(Generators.Forest.Generate(Math.ceil(Math.random() * 16384)));
 			}
+			world.Entities.Add(player);
 			//and ya done
 			
 			//oh and we also need a way to reset the game
