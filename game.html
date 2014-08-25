@@ -6,11 +6,14 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/enumerators.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/engine.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/inventory.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/zones.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/grid.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/style.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/entity.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/floor.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/player.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/rock.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/tree.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
@@ -18,37 +21,36 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/building.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/forest.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/items.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/player.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/rocks.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/axe.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/pickaxe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/stone.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/menu.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
 		<SCRIPT TYPE="text/javascript" SRC="libraries/jquery.min.js"></SCRIPT>
 		<SCRIPT TYPE"text/javascript" SRC="libraries/qrgen/src/jquery.qrcode.js"></SCRIPT>
 		<SCRIPT TYPE="text/javascript" SRC="libraries/qrgen/src/qrcode.js"></SCRIPT>
 
-
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+
+		var pickaxe = new Items_Pickaxe();
+		Inventory.Add(pickaxe);
 
 		var axe = new Items_Axe();
 		Inventory.Add(axe);
-		Inventory.Select(axe);
 
 		<!--
 			var camera = undefined;
 
-			var world = new World();
-
-			for(var i = 0; i < 5000; i++)
-			{
-				var tree = new Tree();
-
-				tree.X = (Math.floor(Math.random() * 124) - 64) << 4;
-				tree.Y = (Math.floor(Math.random() * 128) - 64) << 4;
-
-				world.Entities.Add(tree);
-			}
+			// Building.Generate();
+			// Renderer.Update((Math.floor(Math.random() * 16) - 8) <<4, (Math.floor(Math.random() * 16) - 8) <<4, world);
 			
 			/*
 			//generate simple setup
@@ -60,19 +62,22 @@
 			world.Entities.Add(tree);
 			*/
 
-			var player = new Player();
+			var entities = new Array();
 
-			player.X = 0;
-			player.Y = 0;
+			var player = Generators.Player.Generate();
 
-			world.Entities.Add(player);
+			entities.push(player);
 
-			var item = new Item();
+			entities = entities.concat(Generators.Forest.Generate(4096));
+			entities = entities.concat(Generators.Rocks.Generate(256));
+			entities = entities.concat(Generators.Items.Generate(4));
 
-			item.X = (Math.floor(Math.random() * 64) - 32) << 4;
-			item.Y = (Math.floor(Math.random() * 64) - 32) << 4;
+			var world = new World();
 
-			world.Entities.Add(item);
+			world.Zones.Add(entities);
+
+			world.Zones.Add(Generators.Rocks.Generate(1024));
+			world.Zones.Add(Generators.Forest.Generate(1024));
 
 			//
 
@@ -91,16 +96,22 @@
 				document.getElementById("btn-export").onclick = function(e) {
 					//alert(world.Entities.Export(128,128,-64,-64));
 					exported = world.Entities.Export(128,128,-64,-64);
-					jQuery('#qr').html('').qrcode(exported).show();
+					//jQuery('#qr').html('').qrcode(exported).show();
+					jQuery.ajax({ 
+						type: "POST", url: "./world/",
+						data: {"world":exported},
+						success: function(x) {
+							//alert(x);
+							jQuery('#url').html('<a href="' + x + '">' + x + '</a>');
+							jQuery('#qr').html('').qrcode(x);
+							jQuery('#share').show();
+						}, dataType: "text"
+					});
 
 				};
-				document.getElementById("btn-export-mobile").onclick = function(e) {
-					//alert(world.Entities.Export(128,128,-64,-64));
-					exported = world.Entities.Export(128,128,-64,-64);
-					jQuery('#qr').html('').qrcode(exported).show();
-
+				document.getElementById("share_close").onclick = function(e) {
+					jQuery("#share").hide();
 				};
-				
 
 				for(var control in Enums.Controls)
 				{
@@ -130,6 +141,27 @@
 				}
 
 				{
+					var element = document.getElementById('menu');
+
+					if(element)
+					{
+						for(var item in Menu)
+						{
+							var eItem = document.createElement('div');
+
+							eItem.appendChild(document.createTextNode(Menu[item].Text));
+
+							if(Menu[item].Action)
+							{
+								eItem.onmouseup = Menu[item].Action;
+							}
+
+							element.appendChild(eItem);
+						}
+					}
+				}
+
+				{
 					var element = document.getElementById('camera');
 
 					if(!element)
@@ -138,6 +170,9 @@
 					}
 
 					camera = new Camera(element);
+
+					camera.X = player.X;
+					camera.Y = player.Y;
 
 					camera.Render(world);
 				}
@@ -166,10 +201,6 @@
 
 							default:
 								element.style.display = 'none';
-								while(element.firstChild)
-								{
-									element.removeChild(this.Element.firstChild);
-								}
 								Engine.Paused = false;
 								break;
 						}
@@ -240,13 +271,15 @@
 
 		//-->
 		</SCRIPT>
-		<TITLE>I Wanna Be The Game: The Movie: The Game: The Book: The Game: The Comic: The Website</TITLE>
+		<TITLE>When Planets Kiss: The Game: The Movie: The Game: The Book: The Game: The Comic: The Website: The Podcast</TITLE>
 	</HEAD>
 	<BODY>
 		<DIV ID="camera"></DIV><!-- end camera -->
 
 		<DIV ID="overlay">
-			<div id="debug" style="position: absolute; top: 70px;"><div id="qr"></div></div>
+			<div id="debug" style="position: absolute; top: 70px;">
+
+			</div>
 			<DIV ID="overlay_dpad">
 				<DIV CLASS="button" ID="overlay_control_up"></DIV>
 				<DIV CLASS="button" ID="overlay_control_left"></DIV>
@@ -261,7 +294,15 @@
 			<DIV ID="overlay_menu">
 					<NAV> 
 					<UL id="menu_desktop"> 
-					<LI><a id="btn-export" href="#">Export</a></LI> 
+					<LI>
+						<a id="btn-export" href="#">Share</a>
+						<div id="share">
+							<div id="url"></div>
+							<div id="qr"></div>
+							<button id="share_close">Okay, done sharing</button>
+						</div>
+
+					</LI> 
 					<LI><A href="https://github.com/makerslocal/LudumDare30" target="new">Github</A></LI>
 					</UL>
 					
@@ -286,6 +327,10 @@
 					</NAV>
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
-		<DIV CLASS="modal" ID="inventory"></DIV>
+		<DIV ID="menu"></DIV>
+		<DIV ID="inventory">
+			<DIV CLASS="modal"></DIV>
+			<DIV ID="inventory_items"></DIV>
+		</DIV>
 	</BODY>
 </HTML>

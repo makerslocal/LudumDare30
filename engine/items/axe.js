@@ -2,8 +2,7 @@
 * item.axe.js
 */
 
-Items_Axe.prototype = new Items_Item();
-Items_Axe.prototype.constructor = Item;
+Items_Axe.prototype = new Items_Item('Axe');
 
 function Items_Axe()
 {
@@ -33,12 +32,12 @@ function Items_Axe()
 		{
 			var entity = entities[i];
 
-			if (!(entity instanceof Tree))
+			if (!(entity instanceof Tree) && !(entity instanceof Wood))
 			{
 				continue;
 			}
 
-			Inventory.Add(new Wood());
+			Inventory.Add(new Items_Wood());
 
 			entity.World.Entities.Remove(entity);
 
@@ -52,5 +51,7 @@ function Items_Axe()
 		{
 			return; // No element to render
 		}
+
+		element.appendChild(document.createTextNode('Axe'));
 	}
 }

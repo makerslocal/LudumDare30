@@ -143,26 +143,32 @@ var Building = {
 }
 
 var Renderer = {
-    canvas: null,
-    ctx: null,
-    size: 512,
-    scale: 0,
-    Initialize: function () {
-        this.canvas = document.getElementById('canvas');
-        this.canvas.width = this.size;
-        this.canvas.height = this.size;
-        this.ctx = canvas.getContext('2d');
-        this.scale = this.canvas.width / Building.build_size;
-    },
-    Update: function () {
+    //canvas: null,
+    //ctx: null,
+    //size: 512,
+    //scale: 0,
+    //Initialize: function () {
+    //    this.canvas = document.getElementById('canvas');
+    //    this.canvas.width = this.size;
+    //    this.canvas.height = this.size;
+    //    this.ctx = canvas.getContext('2d');
+    //    this.scale = this.canvas.width / Building.build_size;
+    //},
+    Update: function (offsetX, offsetY, world) {
         for (var y = 0; y < Building.build_size; y++) {
             for (var x = 0; x < Building.build_size; x++) {
                 var tile = Building.build[x][y];
-                if (tile == 0) this.ctx.fillStyle = '#64908A';
-                else if (tile == 1) this.ctx.fillStyle = '#351330';
-                else if (tile == 3) this.ctx.fillStyle = '#666666';
-                else this.ctx.fillStyle = '#424254';
-                this.ctx.fillRect(x * this.scale, y * this.scale, this.scale, this.scale);
+                if (tile == 0); //this.ctx.fillStyle = '#64908A';
+                else if (tile == 1); //this.ctx.fillStyle = '#351330';
+                else if (tile == 3); //this.ctx.fillStyle = '#666666';
+                else //this.ctx.fillStyle = '#424254';
+                {
+                    var wood = new Wood();
+                    wood.X = (x << 4) + offsetX;
+                    wood.Y = (y << 4) + offsetY;
+                    world.Entities.Add(wood);
+                }
+                //this.ctx.fillRect(x * this.scale, y * this.scale, this.scale, this.scale);
             }
         }
     }
@@ -174,6 +180,6 @@ var Helpers = {
     }
 };
 
-Building.Generate();
-Renderer.Initialize();
-Renderer.Update(Building.build);
+//Building.Generate();
+//Renderer.Initialize();
+//Renderer.Update(Building.build);
