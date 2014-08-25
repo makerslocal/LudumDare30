@@ -29,7 +29,7 @@ Generators.Items = {
 			x = x << 4;
 			y = y << 4;
 
-			var item = new Item();
+			var item = new Axe();
 
 			item.X = x;
 			item.Y = y;
