@@ -134,14 +134,17 @@ Inventory.Remove = function(item)
 
 	for(var i = 0; i < this.__Items[item.Name].length; i++)
 	{
-		this.__Items[item.Name].splice(i--, 1);
+		if(this.__Items[item.Name][i] == item)
+		{
+			this.__Items[item.Name].splice(i--, 1);
+		}
 	}
 
 	if(item == this.__Item)
 	{
 		if(this.__Items[item.Name].length)
 		{
-			this.Select(this._Items[item.Name][0]);
+			this.Select(this.__Items[item.Name][0]);
 		}
 		else
 		{

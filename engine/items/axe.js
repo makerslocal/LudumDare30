@@ -32,12 +32,12 @@ function Items_Axe()
 		{
 			var entity = entities[i];
 
-			if (!(entity instanceof Tree) || !(entity instanceof Wood))
+			if (!(entity instanceof Tree) && !(entity instanceof Wood))
 			{
 				continue;
 			}
 
-			Inventory.Add(new Wood());
+			Inventory.Add(new Items_Wood());
 
 			entity.World.Entities.Remove(entity);
 

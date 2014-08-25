@@ -17,22 +17,20 @@ canvas
 	width: 100%;
 }
 
-#camera > div
-{
-	background-repeat: no-repeat;
-	height: 16px;
-	position: absolute;
-	width: 16px;
-}
-
-
 div#camera
 {
 	height: 720px;
 	overflow: hidden;
 	position: static;
 	width: 1280px;
-	z-index: 0;
+}
+
+div#camera > div
+{
+	background-repeat: no-repeat;
+	height: 16px;
+	position: absolute;
+	width: 16px;
 }
 
 div.modal
@@ -43,6 +41,7 @@ div.modal
 	opacity: 0.5;
 	top: 0;
 	width: 100%;
+	z-index: -1;
 }
 
 div#inventory
@@ -52,7 +51,7 @@ div#inventory
 	position: absolute;
 	top: 0;
 	width: 100%;
-	z-index: 20;
+	z-index: 3;
 }
 div#inventory div#inventory_items
 {
@@ -60,7 +59,7 @@ div#inventory div#inventory_items
 	width: 100%;
 }
 
-div#inventory div.item
+div#inventory div#inventory_items div.item
 {
 	background-color: silver;
 	border-color: black;
@@ -77,7 +76,7 @@ div#inventory div.item
 	width: 128px;
 }
 
-div#inventory div.item.selected
+div#inventory div#inventory_items div.item.selected
 {
 	background-color: white;
 }
@@ -87,10 +86,9 @@ div#menu
 	background-color: #FF9999;
 	height: 100px;
 	width: 400px;
-	z-index: 10;
+	z-index: 2;
 	position: absolute;
 	visibility: hidden;
-	
 }
 
 div#overlay

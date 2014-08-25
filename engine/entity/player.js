@@ -29,20 +29,23 @@ function Player()
 
 	this.Render = function(element)
 	{
-		switch(this.Direction)
+		if(this.Direction && Enums.Directions[this.Direction])
 		{
-			case Enums.Directions.Down.ID:
-				this.Style.Background.Position.X = -288;
-				break;
-			case Enums.Directions.Left.ID:
-				this.Style.Background.Position.X = -336;
-				break;
-			case Enums.Directions.Right.ID:
-				this.Style.Background.Position.X = -336;
-				break;
-			case Enums.Directions.Up.ID:
-				this.Style.Background.Position.X = -384;
-				break;
+			switch(Enums.Directions[this.Direction].ID)
+			{
+				case Enums.Directions.Down.ID:
+					this.Style.Background.Position.X = -288;
+					break;
+				case Enums.Directions.Left.ID:
+					this.Style.Background.Position.X = -336;
+					break;
+				case Enums.Directions.Right.ID:
+					this.Style.Background.Position.X = -336;
+					break;
+				case Enums.Directions.Up.ID:
+					this.Style.Background.Position.X = -384;
+					break;
+			}
 		}
 
 		if(!element)
