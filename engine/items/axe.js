@@ -2,10 +2,10 @@
 * item.axe.js
 */
 
-Axe.prototype = new Item();
-Axe.prototype.constructor = Item;
+Items_Axe.prototype = new Items_Item();
+Items_Axe.prototype.constructor = Item;
 
-function Axe()
+function Items_Axe()
 {
 	this.OnAction = function()
 	{
@@ -13,15 +13,21 @@ function Axe()
 		{
 			return;
 		}
+
 		if(!player.Direction)
 		{
 			return;
 		}
-		console.log(player.Direction);
-		var X = Enums.Directions[player.Direction].X * player.Width + player.X;
-		var Y = Enums.Directions[player.Direction].Y * player.Height + player.Y;
 
-		var entities = player.World.Entities.Grid.Search(player.Height, player.Width, X, Y);
+		var x = Enums.Directions[player.Direction].X * player.Width + player.X;
+		var y = Enums.Directions[player.Direction].Y * player.Height + player.Y;
+
+		var entities = player.World.Entities.Grid.Search(player.Height, player.Width, x, y);
+
+		if(!entities)
+		{
+			return;
+		}
 
 		for (var i in entities)
 		{
@@ -32,10 +38,11 @@ function Axe()
 				continue;
 			}
 
-			entity.World.Entities.Remove(entity);
-			delete entity;
-
 			Inventory.Add(new Wood());
+
+			entity.World.Entities.Remove(entity);
+
+			delete entity;
 		}
 	}
 

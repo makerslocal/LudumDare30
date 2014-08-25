@@ -2,10 +2,10 @@
 * item.wood.js
 */
 
-Wood.prototype = new Item();
-Wood.prototype.constructor = Item;
+Items_Wood.prototype = new Items_Item();
+Items_Wood.prototype.constructor = Item;
 
-function Wood()
+function Items_Wood()
 {
 	this.OnAction = function()
 	{

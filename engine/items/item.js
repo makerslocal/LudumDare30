@@ -2,7 +2,7 @@
  * item.itemjs
  */
 
-function Item()
+function Items_Item()
 {
 	this.OnAction = undefined;
 }
