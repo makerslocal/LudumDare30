@@ -29,7 +29,30 @@ Generators.Items = {
 			x = x << 4;
 			y = y << 4;
 
-			var item = new Axe();
+			var item;
+
+			switch(Math.floor(Math.random() * 5))
+			{
+				case 0:
+					item = new Arrow();
+					break;
+
+				case 1:
+					item = new Axe();
+					break;
+
+				case 2:
+					item = new Bow();
+					break;
+
+				case 3:
+					item = new Pickaxe();
+					break;
+
+				case 4:
+					item = new Sword();
+					break;
+			}
 
 			item.X = x;
 			item.Y = y;

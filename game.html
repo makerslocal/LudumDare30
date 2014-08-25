@@ -11,9 +11,16 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/style.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/entity.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/projectile.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/arrow.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/floor.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/item.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/arrow.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/axe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/bow.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/pickaxe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/items/sword.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/monster.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/rock.js" TYPE="text/javascript"></SCRIPT>
@@ -21,7 +28,6 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/jelly.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/tree.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/weapon.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entity/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/entities.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
@@ -32,11 +38,13 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/player.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/generators/rocks.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/arrow.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/axe.js" TYPE="text/javascript"></SCRIPT>
-		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/bow.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/pickaxe.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/sword.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/stone.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/menu.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
@@ -45,16 +53,6 @@
 		<SCRIPT TYPE="text/javascript" SRC="libraries/qrgen/src/qrcode.js"></SCRIPT>
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
-
-		var pickaxe = new Items_Pickaxe();
-		Inventory.Add(pickaxe);
-
-		var axe = new Items_Axe();
-		Inventory.Add(axe);
-
-		var sword = new Items_Sword();
-		Inventory.Add(sword);
-
 		<!--
 			var camera = undefined;
 
@@ -83,15 +81,12 @@
 
 			entities = entities.concat(Generators.Rocks.Generate(Math.ceil(Math.random() * 256) + 128, avoid));
 			entities = entities.concat(Generators.Forest.Generate(Math.ceil(Math.random() * 2048) + 2048, avoid));
-			entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 2, avoid));
+			entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 128, avoid));
 			entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 256) + 8, avoid));
 
 			var world = new World();
 
 			world.Zones.Add(entities);
-
-			world.Zones.Add(Generators.Rocks.Generate(Math.ceil(Math.random() * 16384)));
-			world.Zones.Add(Generators.Forest.Generate(Math.ceil(Math.random() * 16384)));
 
 			//
 

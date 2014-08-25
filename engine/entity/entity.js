@@ -118,7 +118,17 @@ function Entity()
 
 		for(var i = 0; i < entities.length; i++)
 		{
+			if(!entities[i])
+			{
+				entities.splice(i--, 1);
+			}
+
 			if(entities[i] == this)
+			{
+				entities.splice(i--, 1);
+			}
+
+			if(!entities[i].Collide)
 			{
 				entities.splice(i--, 1);
 			}

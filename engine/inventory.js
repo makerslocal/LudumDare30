@@ -31,6 +31,11 @@ Inventory.Contains = function(item)
 		return false;
 	}
 
+	if(!item.Name)
+	{
+		return !!this.__Items[item];
+	}
+
 	if(!this.__Items[item.Name])
 	{
 		return false;
@@ -124,6 +129,23 @@ Inventory.Remove = function(item)
 {
 	if(!item)
 	{
+		return;
+	}
+
+	if(!item.Name)
+	{
+		if(!this.__Items[item])
+		{
+			return;
+		}
+
+		this.__Items[item].pop();
+
+		if(this.__Items[item].length < 1)
+		{
+			delete this.__Items[item];
+		}
+
 		return;
 	}
 
