@@ -248,7 +248,10 @@
 					x += Enums.Directions[direction].X * player.Width;
 					y += Enums.Directions[direction].Y * player.Height;
 
-					player.Direction = direction;
+					if(!Controls.Get(Enums.Controls.Strafe))
+					{
+						player.Direction = direction;
+					}
 				}
 
 				if(player.Scan(x, y))
