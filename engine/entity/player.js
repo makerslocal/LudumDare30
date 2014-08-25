@@ -22,7 +22,9 @@ function Player()
 
 	this.OnPickup = function(entity)
 	{
-		
+		var axe = new Items_Axe();
+		Inventory.Add(axe);
+		Inventory.Select(axe);
 	}
 
 	this.Render = function(element)
