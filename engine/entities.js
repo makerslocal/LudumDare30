@@ -78,22 +78,51 @@ function Entities(world)
 		entity.World = undefined;
 	};
 
-	this.Export = function(height, width, x, y) {
+	this.Import = function(data) {
+		
+		var a = binascii.AsciiToBin(data);
+		var size = Math.sqrt(a.length);
 
-		var ENUM_TREE = 0x01;
+		//Init the object array
+		var ents = new Array();
+		for ( i=0; i<size; i++ ) {
+			for ( j=0; j< size; j++ ) {
+				//alert( a[(size*i)+j] );
+				byte = a[(size*i)+j];
+				if ( byte & Enums.Entities.Tree.ID > 0 ) {
+					//alert("Tree");
+					ent = new Tree();
+					ent.X = i << 4;
+					ent.Y = j << 4;
+					ents.push(ent);
+				} else if ( byte === 0x0 ) {
+					//don't do anything
+				} else {
+					console.log("What is a " + byte + "?");
+				}
+			}
+		}
+
+		
+	};
+
+	this.Export = function(height, width, x, y) {
 
 		x2 = x+width;
 		y2 = y+height;
 
 		var tilewidth = width >> 4;
 		var tileheight = height >> 4;
-	
+
+		var tilex = x >> 4;
+		var tiley = y >> 4;
+
 		//init the byte array (each byte is a tile)
 		var bytearray = new Array();
 		for ( i=0; i<tilewidth; i++ ) {
 			bytearray[i] = new Array();
 			for ( j=0; j<tileheight; j++ ) {
-				bytearray[i][j] = 0x00; //nothin' here
+				bytearray[i][j] = 0x0; //nothin' here
 			}
 		}
 	
@@ -103,14 +132,14 @@ function Entities(world)
 		
 		for ( var i=0; i<included.length; i++) {
 
-			var thebyte = 0x00;			
+			var thebyte = 0x0;			
 
-			var locx = ( included[i].X >> 4 ) + (tilewidth/2);
-			var locy = ( included[i].Y >> 4 ) + (tileheight/2);
+			var locx = ( included[i].X >> 4 ) + (tilex/2);
+			var locy = ( included[i].Y >> 4 ) + (tiley/2);
 			
 			if ( included[i] instanceof Tree ) {
 				//alert("Trees here: " + (locx) + "," + (locy) );
-				thebyte = thebyte | ENUM_TREE;
+				thebyte = thebyte | Enums.Entities.Tree.ID;
 			}
 
 			//alert(binascii.BinToAscii( [thebyte] ));

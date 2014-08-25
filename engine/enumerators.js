@@ -81,4 +81,14 @@ var Enums = {
 			Y  : -1,
 		},
 	},
+	
+	Entities : {
+		
+		Tree : { ID : 0x1 },
+		Floor : { ID : 0x2 },
+		Stone : { ID : 0x3 },
+		Wood : { ID : 0x4 },
+
+	},
+		
 };
