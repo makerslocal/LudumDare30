@@ -31,14 +31,21 @@ Generators.Monsters = {
 
 			var entity = undefined;
 
-			switch(count % 2)
+			switch(count % 6)
 			{
-				case 0:
+				case 3:
+				case 4:
 					entity = new Jelly();
 					break;
 
+				case 0:
 				case 1:
+				case 2:
 					entity = new Snake();
+					break;
+
+				case 5:
+					entity = new Wizard();
 					break;
 			}
 
