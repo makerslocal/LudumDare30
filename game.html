@@ -85,6 +85,13 @@
 					jQuery('#qr').html('').qrcode(exported).show();
 
 				};
+				document.getElementById("btn-export-mobile").onclick = function(e) {
+					//alert(world.Entities.Export(128,128,-64,-64));
+					exported = world.Entities.Export(128,128,-64,-64);
+					jQuery('#qr').html('').qrcode(exported).show();
+
+				};
+				
 
 				for(var control in Enums.Controls)
 				{
@@ -205,14 +212,27 @@
 			
 			<DIV ID="overlay_menu">
 					<NAV> 
-					<UL> 
+					<UL id="menu_desktop"> 
 					<LI><a id="btn-export" href="#">Export</a></LI> 
 					<LI><A href="https://github.com/makerslocal/LudumDare30" target="new">Github</A></LI>
 					</UL>
 					
-					<SELECT> 
-					<OPTION value="" selected="selected">Select</OPTION> 
-					<OPTION value="#">Export</OPTION> 
+					<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+						document.getElementById("menu_mobile").onchange = function () {
+							alert('changed');
+							if (this.selectedIndex > 1) {
+								window.location.href = this.value;
+							}
+							if (this.selectedIndex == 1) {
+								alert('here');
+								window.location.href = this.value;
+							}
+						}
+					</SCRIPT>
+					
+					<SELECT id="menu_mobile">
+					<OPTION value="#" selected="selected">Menu</OPTION> 
+					<OPTION value="#" id="btn-export-mobile">Export</OPTION> 
 					<OPTION value="https://github.com/makerslocal/LudumDare30">Github</OPTION>
 					</SELECT>
 					</NAV>
