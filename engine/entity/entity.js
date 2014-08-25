@@ -99,6 +99,11 @@ function Entity()
 			y = this.Y + this.Height;
 		}
 
+		if(!this.World.Zones.Search(height, width, x, y))
+		{
+			return true;
+		}
+
 		var entities = this.World.Entities.Grid.Search(height, width, x, y);
 
 		if(!entities)
