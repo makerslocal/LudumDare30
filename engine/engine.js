@@ -21,6 +21,21 @@ Engine.Cycle = function()
 	if(!this.Paused)
 	{
 		this.Cycles++;
+	
+		var x = camera.X - (camera.Width  >> 1 >> camera.Scale);
+		var y = camera.Y - (camera.Height >> 1 >> camera.Scale);
+
+		var entities = world.Entities.Grid.Search(camera.Height, camera.Width, x, y);
+
+		for(var entity in entities)
+		{
+			if(!entities[entity].OnCycle)
+			{
+				continue;
+			}
+
+			entities[entity].OnCycle(this.Cycles);
+		}
 	}
 
 	if(this.Listeners.length < 1)
@@ -36,27 +51,7 @@ Engine.Cycle = function()
 			continue;
 		}
 
-		this.Listeners[i](this.Paused ? undefined : this.Cycles);
-	}
-
-	if(this.Paused)
-	{
-		return;
-	}
-	
-	var x = camera.X - (camera.Width  >> 1 >> camera.Scale);
-	var y = camera.Y - (camera.Height >> 1 >> camera.Scale);
-
-	var entities = world.Entities.Grid.Search(camera.Height, camera.Width, x, y);
-
-	for(var entity in entities)
-	{
-		if(!entities[entity].OnCycle)
-		{
-			continue;
-		}
-
-		entities[entity].OnCycle(this.Cycles);
+		this.Listeners[i](this.Cycles);
 	}
 };
 

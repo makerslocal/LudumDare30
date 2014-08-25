@@ -204,4 +204,11 @@ function Camera(element)
 	};
 
 	this.OnResize(undefined);
+
+	var self = this;
+
+	Engine.AddListener(function(cycles)
+	{
+		self.Render(world);
+	});
 }

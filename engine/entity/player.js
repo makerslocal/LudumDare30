@@ -4,7 +4,6 @@
 
 // Prototype sets Player to be a child of Entity.
 Player.prototype = new Entity();
-Player.prototype.constructor = Entity;
 
 // The Player object
 function Player()
@@ -20,11 +19,61 @@ function Player()
 		return true;
 	}
 
-	this.OnPickup = function(entity)
+	this.OnCycle = function(cycles)
 	{
-		var axe = new Items_Axe();
-		Inventory.Add(axe);
-		Inventory.Select(axe);
+		if(Controls.Get(Enums.Controls.Action))
+		{
+			Inventory.OnAction();
+		}
+
+		var x = 0;
+		var y = 0;
+
+		for(var direction in Enums.Directions)
+		{
+			if(!direction)
+			{
+				continue;
+			}
+
+			if(!Enums.Controls[direction])
+			{
+				continue;
+			}
+
+			if(!Controls.Get(Enums.Controls[direction]))
+			{
+				continue;
+			}
+
+			x += Enums.Directions[direction].X * player.Width;
+			y += Enums.Directions[direction].Y * player.Height;
+
+			if(!Controls.Get(Enums.Controls.Strafe))
+			{
+				this.Direction = direction;
+			}
+		}
+
+		if(this.Scan(x, y))
+		{
+			return;
+		}
+
+		// Remove old player object
+		this.World.Entities.Grid.Remove(this);
+		this.X += x; // Update player obj coords
+		this.Y += y; // ditto ^
+		// Create new player obj in updated location
+		this.World.Entities.Grid.Add(this);
+
+		if(!camera)
+		{
+			return; // No camera, can't render
+		}
+
+		camera.X += x; // Adjust center of screen to track player
+		camera.Y += y; // ditto ^
 	}
 
 	this.Render = function(element)

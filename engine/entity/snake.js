@@ -7,6 +7,16 @@ function Snake()
 	this.Style.Background.Position.X = 0;
 	this.Style.Background.Position.Y = -1504;
 
+	this.OnCycle = function(cycles)
+	{
+		if(cycles % 4)
+		{
+			return;
+		}
+
+		this.Wander();
+	}
+
 	this.Render = function(element)
 	{
 		switch(this.Direction)
@@ -32,16 +42,4 @@ function Snake()
 
 		element.setAttribute('class', 'snake');
 	}
-
-	var self = this;
-
-	Engine.AddListener(function(cycles)
-	{
-		if(cycles % 4)
-		{
-			return;
-		}
-
-		self.Wander();
-	});
 }
