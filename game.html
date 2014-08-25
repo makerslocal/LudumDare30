@@ -20,6 +20,9 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/world.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/controls.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/item.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/axe.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/items/wood.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
 		<SCRIPT TYPE="text/javascript" SRC="libraries/jquery.min.js"></SCRIPT>
 		<SCRIPT TYPE"text/javascript" SRC="libraries/qrgen/src/jquery.qrcode.js"></SCRIPT>
@@ -27,6 +30,11 @@
 
 
 		<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
+
+		var axe = new Axe();
+		Inventory.Add(axe);
+		Inventory.Select(axe);
+
 		<!--
 			var camera = undefined;
 
@@ -201,7 +209,7 @@
 					x += Enums.Directions[direction].X * player.Width;
 					y += Enums.Directions[direction].Y * player.Height;
 
-					player.Direction = Enums.Directions[direction].ID;
+					player.Direction = direction;
 				}
 
 				if(player.Scan(x, y))

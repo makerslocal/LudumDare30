@@ -2,18 +2,20 @@
 * item.wood.js
 */
 
-Weapon.prototype = new Item();
-Weapon.prototype.constructor = Item;
+Wood.prototype = new Item();
+Wood.prototype.constructor = Item;
 
 function Wood()
 {
+	this.OnAction = function()
+	{
+		
+	}
 	this.Render = function(element)
 	{
 		if(!element)
 		{
 			return; // No element to render
 		}
-
-		element.setAttribute('item', 'wood');
 	}
 }
