@@ -1,7 +1,8 @@
 *
 {
 	margin: 0;
-	padding: 0;	
+	padding: 0;
+	font-family:sans-serif;
 }
 
 body
@@ -16,13 +17,14 @@ canvas
 	width: 100%;
 }
 
-div
+#camera > div
 {
 	background-repeat: no-repeat;
 	height: 16px;
 	position: absolute;
 	width: 16px;
 }
+
 
 div#camera
 {
@@ -115,17 +117,19 @@ div#overlay_menu ul li:hover {
 	background-color: white;
 }
 
-div#overlay_menu ul a {
+div#overlay_menu ul li > a {
 	display: inline;
 	text-decoration: none;
 	opacity: 1.0;
 	color: #000000;
 }
 
+/*
 @media (max-width: 960px) {
   div#overlay_menu ul     { display: none; }
   div#overlay_menu select { display: inline-block; }
 }
+*/
 
 
 
@@ -209,8 +213,17 @@ div#debug {
 div#qr {
 	background-color:white;
 	border:16px solid white;
-	width:255px;
-	height:255px;	
-	display:none;
+	width:300px;
+	height:300px;
+	margin-left:auto;
+	margin-right:auto;
 }
+div#share {
+	display:none;
+	position:relative;
+	background-color:white;
+	text-align:center;
+	border:16px solid black;
+}
+
 

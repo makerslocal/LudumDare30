@@ -84,13 +84,19 @@
 					exported = world.Entities.Export(128,128,-64,-64);
 					//jQuery('#qr').html('').qrcode(exported).show();
 					jQuery.ajax({ 
-						type: "POST", url: "./share/",
-						data: {"zone":exported},
+						type: "POST", url: "./world/",
+						data: {"world":exported},
 						success: function(x) {
-							alert(x);
+							//alert(x);
+							jQuery('#url').html('<a href="' + x + '">' + x + '</a>');
+							jQuery('#qr').html('').qrcode(x);
+							jQuery('#share').show();
 						}, dataType: "text"
 					});
 
+				};
+				document.getElementById("share_close").onclick = function(e) {
+					jQuery("#share").hide();
 				};
 
 				for(var control in Enums.Controls)
@@ -198,7 +204,9 @@
 		<DIV ID="camera"></DIV><!-- end camera -->
 
 		<DIV ID="overlay">
-			<div id="debug" style="position: absolute; top: 70px;"><div id="qr"></div></div>
+			<div id="debug" style="position: absolute; top: 70px;">
+
+			</div>
 			<DIV ID="overlay_dpad">
 				<DIV CLASS="button" ID="overlay_control_up"></DIV>
 				<DIV CLASS="button" ID="overlay_control_left"></DIV>
@@ -213,7 +221,15 @@
 			<DIV ID="overlay_menu">
 					<NAV> 
 					<UL> 
-					<LI><a id="btn-export" href="#">Export</a></LI> 
+					<LI>
+						<a id="btn-export" href="#">Share</a>
+						<div id="share">
+							<div id="url"></div>
+							<div id="qr"></div>
+							<button id="share_close">Okay, done sharing</button>
+						</div>
+
+					</LI> 
 					<LI><A href="https://github.com/makerslocal/LudumDare30" target="new">Github</A></LI>
 					</UL>
 					
