@@ -21,20 +21,23 @@ Engine.Cycle = function()
 	if(!this.Paused)
 	{
 		this.Cycles++;
-	
-		var x = camera.X - (camera.Width  >> 1 >> camera.Scale);
-		var y = camera.Y - (camera.Height >> 1 >> camera.Scale);
 
-		var entities = world.Entities.Grid.Search(camera.Height, camera.Width, x, y);
-
-		for(var entity in entities)
+		if(camera)
 		{
-			if(!entities[entity].OnCycle)
-			{
-				continue;
-			}
+			var x = camera.X - (camera.Width  >> 1 >> camera.Scale);
+			var y = camera.Y - (camera.Height >> 1 >> camera.Scale);
 
-			entities[entity].OnCycle(this.Cycles);
+			var entities = world.Entities.Grid.Search(camera.Height, camera.Width, x, y);
+
+			for(var entity in entities)
+			{
+				if(!entities[entity].OnCycle)
+				{
+					continue;
+				}
+
+				entities[entity].OnCycle(this.Cycles);
+			}
 		}
 	}
 

@@ -6,6 +6,8 @@ Item.prototype = new Entity();
 
 function Item()
 {
+	Entity.apply(this, arguments);
+
 	this.OnCycle = function(cycles)
 	{
 		if(this.IsTouching(player))

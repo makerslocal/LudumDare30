@@ -2,6 +2,8 @@ Snake.prototype = new Monster();
 
 function Snake()
 {
+	Monster.apply(this, arguments);
+
 	this.Style.Background.Image = 'sprites.png';
 
 	this.Style.Background.Position.X = 0;

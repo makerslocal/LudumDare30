@@ -8,6 +8,8 @@ Player.prototype = new Entity();
 // The Player object
 function Player()
 {
+	Entity.apply(this, arguments);
+
 	this.Style.Background.Image = 'sprites.png';
 
 	this.Style.Background.Position.X = 0;

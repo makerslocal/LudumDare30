@@ -80,11 +80,11 @@
 			entities.push(player);
 
 			// entities = entities.concat(Generators.Building.Generate(1)); // Causes an infinite loop.
-			
-			entities = entities.concat(Generators.Forest.Generate(Math.ceil(Math.random() * 2048) + 2048), avoid);
-			entities = entities.concat(Generators.Rocks.Generate(Math.ceil(Math.random() * 256) + 128), avoid);
-			entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 2), avoid);
-			entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 256) + 8), avoid);
+
+			entities = entities.concat(Generators.Rocks.Generate(Math.ceil(Math.random() * 256) + 128, avoid));
+			entities = entities.concat(Generators.Forest.Generate(Math.ceil(Math.random() * 2048) + 2048, avoid));
+			entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 4) + 2, avoid));
+			entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 256) + 8, avoid));
 
 			var world = new World();
 

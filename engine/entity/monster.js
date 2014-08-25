@@ -2,6 +2,8 @@ Monster.prototype = new Entity();
 
 function Monster()
 {
+	Entity.apply(this, arguments);
+
 	this.Direction = undefined;
 
 	this.Collide = function(entity)

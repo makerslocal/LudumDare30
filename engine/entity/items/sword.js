@@ -2,6 +2,8 @@ Sword.prototype = new Item();
 
 function Sword()
 {
+	Item.apply(this, arguments);
+
 	this.Style.Background.Image = 'sprites.png';
 	this.Style.Background.Position.X = -432;
 	this.Style.Background.Position.Y = -1520;

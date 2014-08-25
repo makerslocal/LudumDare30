@@ -2,6 +2,8 @@ Pickaxe.prototype = new Item();
 
 function Pickaxe()
 {
+	Item.apply(this, arguments);
+
 	this.Style.Background.Image = 'sprites.png';
 	this.Style.Background.Position.X = -448;
 	this.Style.Background.Position.Y = -1520;

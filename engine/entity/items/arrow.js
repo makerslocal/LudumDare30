@@ -2,6 +2,8 @@ Arrow.prototype = new Item();
 
 function Arrow()
 {
+	Item.apply(this, arguments);
+
 	this.Style.Background.Image = 'sprites.png';
 	this.Style.Background.Position.X = -400;
 	this.Style.Background.Position.Y = -1520;

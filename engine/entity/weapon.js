@@ -6,6 +6,8 @@ Weapon.prototype = new Entity();
 
 function Weapon()
 {
+	Entity.apply(this, arguments);
+
 	this.Style.Background.Image = 'sprites/spritesheet_use.png';
 	this.Style.Background.Position.X = -432;
 	this.Style.Background.Position.Y = -480;

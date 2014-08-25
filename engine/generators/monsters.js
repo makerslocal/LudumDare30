@@ -29,26 +29,23 @@ Generators.Monsters = {
 			x = x << 4;
 			y = y << 4;
 
-			if(Math.round(Math.random()))
+			var entity = undefined;
+
+			switch(count % 2)
 			{
-				console.log(1);
-				var snake = new Snake();
+				case 0:
+					entity = new Jelly();
+					break;
 
-				snake.X = x;
-				snake.Y = y;
-
-				entities.push(snake);
+				case 1:
+					entity = new Snake();
+					break;
 			}
-			else
-			{
-				console.log(2);
-				var jelly = new Jelly();
 
-				jelly.X = x;
-				jelly.Y = y;
+			entity.X = x;
+			entity.Y = y;
 
-				entities.push(jelly);
-			}
+			entities.push(entity);
 
 			if(!avoid[x])
 			{
