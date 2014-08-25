@@ -33,7 +33,7 @@ function Items_Axe()
 		{
 			var entity = entities[i];
 
-			if (!(entity instanceof Tree))
+			if (!(entity instanceof Tree) || !(entity instanceof Wood))
 			{
 				continue;
 			}
