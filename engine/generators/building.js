@@ -1,3 +1,8 @@
+/*
+* Based on code found at http://bigbadwofl.me/random-dungeon-generator/
+* Thanks for the inspiration, Big Bad Wofl!
+*/
+
 var Generators = Generators || new Object();
 
 Generators.Building = {
