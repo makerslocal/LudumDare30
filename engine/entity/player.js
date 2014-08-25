@@ -9,10 +9,10 @@ Player.prototype.constructor = Entity;
 // The Player object
 function Player()
 {
-	this.Style.Background.Image = 'sprites/spritesheet_use.png';
+	this.Style.Background.Image = 'sprites.png';
 
-	this.Style.Background.Position.X = -288;
-	this.Style.Background.Position.Y = -304;
+	this.Style.Background.Position.X = 0;
+	this.Style.Background.Position.Y = -(1024 + (Math.floor(Math.random() * 6) << 4));
 
 	// Player.Render, create a new player?
 	this.Collide = function(entity)
@@ -34,16 +34,16 @@ function Player()
 			switch(Enums.Directions[this.Direction].ID)
 			{
 				case Enums.Directions.Down.ID:
-					this.Style.Background.Position.X = -288;
+					this.Style.Background.Position.X = 0;
 					break;
 				case Enums.Directions.Left.ID:
-					this.Style.Background.Position.X = -336;
+					this.Style.Background.Position.X = -128;
 					break;
 				case Enums.Directions.Right.ID:
-					this.Style.Background.Position.X = -336;
+					this.Style.Background.Position.X = -48;
 					break;
 				case Enums.Directions.Up.ID:
-					this.Style.Background.Position.X = -384;
+					this.Style.Background.Position.X = -144;
 					break;
 			}
 		}

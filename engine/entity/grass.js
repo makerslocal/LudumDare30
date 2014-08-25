@@ -1,5 +1,4 @@
 Grass.prototype = new Entity();
-Grass.prototype.constructor = Entity;
 
 function Grass()
 {

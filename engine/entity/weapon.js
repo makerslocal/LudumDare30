@@ -3,7 +3,6 @@
 */
 
 Weapon.prototype = new Entity();
-Weapon.prototype.constructor = Entity;
 
 function Weapon()
 {

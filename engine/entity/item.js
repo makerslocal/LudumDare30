@@ -3,7 +3,6 @@
 */
 
 Item.prototype = new Entity();
-Item.prototype.constructor = Entity;
 
 function Item()
 {

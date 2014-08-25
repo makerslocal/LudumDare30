@@ -1,5 +1,4 @@
 Floor.prototype = new Entity();
-Floor.prototype.constructor = Entity;
 
 function Floor()
 {
