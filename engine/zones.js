@@ -18,15 +18,7 @@ function Zones(world)
 
 		if(zones[0] && zones[0][0])
 		{
-			var points = new Array();
-
-			for(var xx in zones)
-			{
-				for(var yy in zones[xx])
-				{
-					points.push([parseInt(xx), parseInt(yy)]);
-				}
-			}
+			var points = this.List();
 
 			while(!x && !y)
 			{
@@ -68,7 +60,7 @@ function Zones(world)
 			zones[x] = new Object();
 		}
 
-		zones[x][y] = true;
+		zones[x][y] = '#9FE30E';
 
 		x = x << size;
 		y = y << size;
@@ -80,7 +72,22 @@ function Zones(world)
 
 			this.World.Entities.Add(entities[i]);
 		}
-	}
+	};
+
+	this.List = function()
+	{
+		var points = new Array();
+
+		for(var x in zones)
+		{
+			for(var y in zones[x])
+			{
+				points.push([parseInt(x), parseInt(y)]);
+			}
+		}
+
+		return points;
+	};
 
 	this.Search = function(height, width, x, y)
 	{

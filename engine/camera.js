@@ -16,6 +16,8 @@ function Camera(element)
 	// Create a child of Camera, set it to our passed in element
 	this.Element = element;
 
+	this.Scale = 1;
+
 	// Camera resolution?
 	this.Height = 0;
 	this.Width  = 0;
@@ -43,10 +45,13 @@ function Camera(element)
 		{
 			this.Element.removeChild(this.Element.firstChild);
 		}
+
+		var height = this.Height >> this.Scale;
+		var width  = this.Width >> this.Scale;
 		
 		// Use bitwise to move x&y to top corner of screen
-		var x = this.X - (this.Width  >> 1);
-		var y = this.Y - (this.Height >> 1);
+		var x = this.X - (this.Width  >> 1 >> this.Scale);
+		var y = this.Y - (this.Height >> 1 >> this.Scale);
 
 		// Erm, search for things?
 		var entities = world.Entities.Grid.Search(this.Height, this.Width, x, y);
@@ -72,10 +77,30 @@ function Camera(element)
 
 		if(canvas)
 		{
-			canvas.setAttribute('height', this.Height);
-			canvas.setAttribute('width',  this.Width);
+			canvas.setAttribute('height', height);
+			canvas.setAttribute('width',  width);
 
 			context = canvas.getContext('2d');
+		}
+
+		var zones = world.Zones.List();
+
+		for(var zone in zones)
+		{
+			var size = 1 << 7 << 4;
+
+			var xZone = (zones[zone][0] << 7 << 4) - x - (size >> 1);
+			var yZone = (zones[zone][1] << 7 << 4) - y - (size >> 1);
+
+			if(!canvas)
+			{
+				// TODO: Create DIV zone background.
+			}
+			else
+			{
+				context.fillStyle = '#9FE30E';
+				context.fillRect(xZone, yZone, size, size);
+			}
 		}
 
 		for(var i = 0; i < count; i++)
@@ -101,26 +126,36 @@ function Camera(element)
 			{
 				entity.Render();
 
+				var rgb = entity.Style.Background.Color;
+
+				if(rgb)
+				{
+					context.fillStyle = rgb;
+					context.fillRect(xx, yy, entity.Width, entity.Height);
+				}
+
 				var src = entity.Style.Background.Image;
 
-				if(src)
+				if(!src)
 				{
-					if(!this.Bitmaps[src])
-					{
-						this.Bitmaps[src] = new Image();
-						this.Bitmaps[src].src = src;
-					}
-
-					if(!this.Bitmaps[src].complete)
-					{
-						continue;
-					}
-
-					var offsetX = -entity.Style.Background.Position.X;
-					var offsetY = -entity.Style.Background.Position.Y;
-
-					context.drawImage(this.Bitmaps[src], offsetX, offsetY, entity.Width, entity.Height, xx, yy, entity.Width, entity.Height);
+					continue;
 				}
+
+				if(!this.Bitmaps[src])
+				{
+					this.Bitmaps[src] = new Image();
+					this.Bitmaps[src].src = src;
+				}
+
+				if(!this.Bitmaps[src].complete)
+				{
+					continue;
+				}
+
+				var offsetX = -entity.Style.Background.Position.X;
+				var offsetY = -entity.Style.Background.Position.Y;
+
+				context.drawImage(this.Bitmaps[src], offsetX, offsetY, entity.Width, entity.Height, xx, yy, entity.Width, entity.Height);
 			}
 		}
 

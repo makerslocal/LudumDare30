@@ -7,7 +7,7 @@
 
 body
 {
-	background-color: #9FE30E;
+	background-color: #333;
 	overflow: hidden;
 }
 
@@ -15,6 +15,14 @@ canvas
 {
 	height: 100%;
 	width: 100%;
+
+    image-rendering: optimizeSpeed;             // FireFox
+    image-rendering: -moz-crisp-edges;          // FireFoxF 6.0+
+    image-rendering: -webkit-optimize-contrast; // Webkit
+    image-rendering: -o-crisp-edges;            // Opera
+    image-rendering: optimize-contrast;
+
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
 div#camera
@@ -56,6 +64,7 @@ div#inventory
 div#inventory div#inventory_items
 {
 	height: 100%;
+	padding: 64px;
 	width: 100%;
 }
 
@@ -83,12 +92,27 @@ div#inventory div#inventory_items div.item.selected
 
 div#menu
 {
-	background-color: #FF9999;
-	height: 100px;
-	width: 400px;
-	z-index: 2;
+	background-color: black;
 	position: absolute;
-	visibility: hidden;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+}
+
+div#menu div
+{
+	color: white;
+	cursor: pointer;
+	display: inline-block;
+	font-weight: bold;
+	padding: 2px;
+	text-align: center;
+	width: 128px;
+}
+
+div#menu div:hover
+{
+	background-color: #333;
 }
 
 div#overlay

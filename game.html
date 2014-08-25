@@ -31,6 +31,7 @@
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/pickaxe.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/items/stone.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT LANGUAGE="javascript" SRC="engine/camera.js" TYPE="text/javascript"></SCRIPT>
+		<SCRIPT LANGUAGE="javascript" SRC="engine/menu.js" TYPE="text/javascript"></SCRIPT>
 		<SCRIPT language="javascript" SRC="libraries/binascii.js"></SCRIPT>
 		<SCRIPT TYPE="text/javascript" SRC="libraries/jquery.min.js"></SCRIPT>
 		<SCRIPT TYPE"text/javascript" SRC="libraries/qrgen/src/jquery.qrcode.js"></SCRIPT>
@@ -142,6 +143,27 @@
     				};
 
     				element.onmouseout = element.onmouseup;
+				}
+
+				{
+					var element = document.getElementById('menu');
+
+					if(element)
+					{
+						for(var item in Menu)
+						{
+							var eItem = document.createElement('div');
+
+							eItem.appendChild(document.createTextNode(Menu[item].Text));
+
+							if(Menu[item].Action)
+							{
+								eItem.onmouseup = Menu[item].Action;
+							}
+
+							element.appendChild(eItem);
+						}
+					}
 				}
 
 				{
@@ -310,6 +332,7 @@
 					</NAV>
 			</DIV><!-- end #overlay_menu -->
 		</DIV><!-- end #overlay -->
+		<DIV ID="menu"></DIV>
 		<DIV ID="inventory">
 			<DIV CLASS="modal"></DIV>
 			<DIV ID="inventory_items"></DIV>
