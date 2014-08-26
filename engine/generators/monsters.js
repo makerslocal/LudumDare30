@@ -31,7 +31,7 @@ Generators.Monsters = {
 
 			var entity = undefined;
 
-			switch(count % 6)
+			switch(count % 7)
 			{
 				case 3:
 				case 4:
@@ -48,9 +48,9 @@ Generators.Monsters = {
 					entity = new Wizard();
 					break;
 
-				//case 6:
-				//	entity = new Dolphin();
-				//	break;
+				case 6:
+					entity = new Dolphin();
+					break;
 			}
 
 			entity.X = x;
