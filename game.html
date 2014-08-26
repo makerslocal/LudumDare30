@@ -96,6 +96,9 @@
 			var entities = new Array();
 			var player = Generators.Player.Generate();
 
+			player.X += 1024 << 4;
+			player.Y += 1024 << 4;
+
 			var avoid = new Array();
 			//entities.push(player);
 
@@ -120,9 +123,6 @@
 					entities[i].X += 1024 << 4;
 					entities[i].Y += 1024 << 4;
 				}
-
-				player.X += 1024 << 4;
-				player.Y += 1024 << 4;
 
 				world.Zones.Add(entities);
 			}
