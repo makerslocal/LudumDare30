@@ -134,8 +134,8 @@ function Entities(world)
 		x2 = x+width;
 		y2 = y+height;
 
-		var tilewidth = width >> 4;
-		var tileheight = height >> 4;
+		var tilewidth = (width >> 4);
+		var tileheight = (height >> 4);
 
 		var tilex = x >> 4;
 		var tiley = y >> 4;
@@ -150,6 +150,7 @@ function Entities(world)
 		}
 	
 		//alert("Exporting entities from " + x + "," + y + " to " + x2 + "," + y2);
+		//alert("Exporting entities from " + tilex + "," + tiley + ", size " + tilewidth + "," + tileheight);
 
 		var included = this.Grid.Search(height,width,x,y);
 		
@@ -157,8 +158,12 @@ function Entities(world)
 
 			var thebyte = 0x0;			
 
-			var locx = ( included[i].X >> 4 ) + (tilex/2);
-			var locy = ( included[i].Y >> 4 ) + (tiley/2);
+			//alert("Saving " + (included[i].X >> 4) + "," + (included[i].Y>>4));
+			//var locx = ( included[i].X >> 4 ) + (tilex/2);
+			//var locy = ( included[i].Y >> 4 ) + (tiley/2);
+			var locx = ( included[i].X - x ) >> 4;
+			var locy = ( included[i].Y - y ) >> 4;
+			//alert("Saving " + locx + "," + locy);
 			
 			if ( included[i] instanceof Tree ) {
 				thebyte = thebyte | Enums.Entities.Tree.ID;

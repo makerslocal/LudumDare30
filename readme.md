@@ -19,9 +19,9 @@ Good luck.
 For now, simply aquire the working directory (this git) and open game.html in a javascript-capable browser.
 
 
-### ToDo
+### Known issues
 
-* Write a ToDo
+* Loading from storage kind of sucks. You have to reset your game to get items to exist again, after you reload the browser.
 
 
 ### Project Members
