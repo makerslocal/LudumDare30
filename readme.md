@@ -35,3 +35,6 @@ For now, simply aquire the working directory (this git) and open game.html in a 
 | Hunter “hfuller” Fuller | Stream Master, Programmer |
 | Christopher “ctag” Bero | Annoying Code Reviewer |
 | Pat "dave" Xin | Sprites, Artwork |
+
+Thanks to Revalis on our channel (twitch.tv/makerslocal256) for the awesome name suggestion!
+Thanks to BigBadWofl for the random dungeon generator code that was an inspiration for our random building code (not yet implemented).
