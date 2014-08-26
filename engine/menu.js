@@ -28,7 +28,7 @@ var Menu = [
 		Action : function(e) {
 			theX = player.X >> 4 >> 7;// << 7 << 4;
 			theY = player.Y >> 4 >> 7;// << 7 << 4;
-			alert(theX + " " + theY);
+			//alert(theX + " " + theY);
 			sizeX = theX + 1;
 			sizeY = theY + 1;
 			theX = theX << 7 << 4;

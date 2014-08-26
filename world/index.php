@@ -5,7 +5,7 @@ if ( array_key_exists("world",$_POST) ) {
 	$dirname = substr(str_replace('.','',microtime(TRUE)), 3);
 	mkdir($dirname);
 	file_put_contents($dirname . '/index.html', $_POST["world"]);
-	die('http://' . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] . '?' . $dirname);
+	die('http://projects.makerslocal.org' . $_SERVER["REQUEST_URI"] . '?' . $dirname);
 } else if ( count($_REQUEST) > 0 ) {
 	//we tryina fetch, nah mean?
 	$dirname = array_keys($_REQUEST)[0];

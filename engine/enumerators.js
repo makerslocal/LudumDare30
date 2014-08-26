@@ -100,7 +100,7 @@ var Enums = {
 		Wizard : { ID : 0x7 },
 		Snake : { ID : 0xB },
 		Arrrow : { ID : 0x9 },
-		Arrow : { ID : 0xD },
+		Arrow : { ID : 0xE },
 
 	},
 		
