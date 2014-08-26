@@ -16,12 +16,35 @@ function Wizard()
 			return;
 		}
 
+		if(cycles % 6)
+		{
+			if(!this.Direction)
+			{
+				return
+			}
+
+			var x = this.Direction.X * this.Width + this.X;
+			var y = this.Direction.Y * this.Height + this.Y;
+
+			var entity = new Arrrow();
+			entity.X = x;
+			entity.Y = y;
+
+			entity.Direction = this.Direction;
+			this.World.Entities.Add(entity);
+		}
+
 		this.Wander();
 	}
 
 	this.Render = function(element)
 	{
-		switch(this.Direction)
+		if(!this.Direction)
+		{
+			return;
+		}
+		
+		switch(this.Direction.ID)
 		{
 			case Enums.Directions.Down.ID:
 				this.Style.Background.Position.X = -(((Engine.Cycles >> 1) % 3) << 4);

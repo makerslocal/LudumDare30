@@ -1,32 +1,42 @@
-Snake.prototype = new Monster();
+Dolphin.prototype = new Monster();
 
-function Snake()
+function Dolphin()
 {
 	Monster.apply(this, arguments);
 
 	this.Style.Background.Image = 'sprites.png';
 
-	this.Style.Background.Position.X = 0;
-	this.Style.Background.Position.Y = -1504;
+	this.Style.Background.Position.X = 208;
+	this.Style.Background.Position.Y = -1520;
 
 	this.OnCycle = function(cycles)
 	{
-		if(cycles % 4)
+		if(cycles % 8)
 		{
 			return;
 		}
+
+		if(!this.Direction)
+		{
+			return
+		}
+
+		var x = this.Direction.X * this.Width + this.X;
+		var y = this.Direction.Y * this.Height + this.Y;
+
+		var entity = new Stone();
+		entity.X = x;
+		entity.Y = y;
+
+		entity.Direction = this.Direction;
+		this.World.Entities.Add(entity);
 
 		this.Wander();
 	}
 
 	this.Render = function(element)
 	{
-		if(!this.Direction)
-		{
-			return;
-		}
-		
-		switch(this.Direction.ID)
+		switch(this.Direction)
 		{
 			case Enums.Directions.Down.ID:
 				this.Style.Background.Position.X = -((Engine.Cycles % 3) << 4);
@@ -47,6 +57,6 @@ function Snake()
 			return; // No element to render
 		}
 
-		element.setAttribute('class', 'snake');
+		element.setAttribute('class', 'dolphin');
 	}
 }

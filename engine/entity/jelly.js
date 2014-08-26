@@ -21,7 +21,12 @@ function Jelly()
 
 	this.Render = function(element)
 	{
-		switch(this.Direction)
+		if(!this.Direction)
+		{
+			return;
+		}
+
+		switch(this.Direction.ID)
 		{
 			case Enums.Directions.Down.ID:
 				this.Style.Background.Position.X = -(((Engine.Cycles >> 1) % 3) << 4);

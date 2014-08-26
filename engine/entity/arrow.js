@@ -16,23 +16,25 @@ function Arrrow()
 
 	this.Render = function(element)
 	{
-		if(this.Direction && Enums.Directions[this.Direction])
+		if(!this.Direction)
 		{
-			switch(Enums.Directions[this.Direction].ID)
-			{
-				case Enums.Directions.Down.ID:
-					this.Style.Background.Position.Y = -1472;
-					break;
-				case Enums.Directions.Left.ID:
-					this.Style.Background.Position.Y = -1456;
-					break;
-				case Enums.Directions.Right.ID:
-					this.Style.Background.Position.Y = -1488;
-					break;
-				case Enums.Directions.Up.ID:
-					this.Style.Background.Position.Y = -1504;
-					break;
-			}
+			return;
+		}
+
+		switch(this.Direction.ID)
+		{
+			case Enums.Directions.Down.ID:
+				this.Style.Background.Position.Y = -1472;
+				break;
+			case Enums.Directions.Left.ID:
+				this.Style.Background.Position.Y = -1456;
+				break;
+			case Enums.Directions.Right.ID:
+				this.Style.Background.Position.Y = -1488;
+				break;
+			case Enums.Directions.Up.ID:
+				this.Style.Background.Position.Y = -1504;
+				break;
 		}
 
 		if(!element)

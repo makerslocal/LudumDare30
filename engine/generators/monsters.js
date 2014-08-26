@@ -47,6 +47,10 @@ Generators.Monsters = {
 				case 5:
 					entity = new Wizard();
 					break;
+
+				//case 6:
+				//	entity = new Dolphin();
+				//	break;
 			}
 
 			entity.X = x;
