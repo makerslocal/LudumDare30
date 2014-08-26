@@ -95,6 +95,12 @@ var Enums = {
 		Floor : { ID : 0x2 },
 		Stone : { ID : 0x3 },
 		Wood : { ID : 0x4 },
+		Rock : { ID : 0x5 },
+		Jelly : { ID : 0x9 },
+		Wizard : { ID : 0x7 },
+		Snake : { ID : 0xB },
+		Arrrow : { ID : 0x9 },
+		Arrow : { ID : 0xD },
 
 	},
 		
