@@ -93,6 +93,7 @@ function Entities(world)
 			for ( j=0; j< size; j++ ) {
 				//alert( a[(size*i)+j] );
 				byte = a[(size*i)+j];
+				ent = null;
 				if ( byte === 0x0 ) {
 					continue;
 				} else if ( byte & Enums.Entities.Tree.ID == byte ) {
