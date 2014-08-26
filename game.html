@@ -120,6 +120,13 @@
 			}
 			world.Entities.Add(player);
 			//and ya done
+
+			//if there is a qr code just scanned, we need to import that
+			if ( localStorage.getItem("ld30zones.import") !== null ) {
+				world.Zones.Add(world.Entities.Import(localStorage["ld30zones.import"]));
+				delete localStorage["ld30zones.import"];
+				alert("Imported that world into your universe.");
+			}
 			
 			//oh and we also need a way to reset the game
 			var PissOnLocalStorage = function() {
