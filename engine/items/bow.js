@@ -26,7 +26,7 @@ function Items_Bow()
 
 		var entity = new Arrrow();
 
-		entity.Direction = player.Direction;
+		entity.Direction = Enus.Directions[player.Direction];
 
 		entity.X = x;
 		entity.Y = y;

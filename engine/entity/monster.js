@@ -33,7 +33,7 @@ function Monster()
 				continue;
 			}
 
-			this.Direction = directions[direction].ID;
+			this.Direction = directions[direction];
 
 			if(!this.World)
 			{

@@ -13,8 +13,8 @@ function Projectile()
 			return;
 		}
 
-		var x = Enums.Directions[this.Direction].X * this.Width;
-		var y = Enums.Directions[this.Direction].Y * this.Height;
+		var x = this.Direction.X * this.Width;
+		var y = this.Direction.Y * this.Height;
 
 		var entities = this.Scan(x, y);
 
