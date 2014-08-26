@@ -115,6 +115,15 @@
 				entities = entities.concat(Generators.Items.Generate(Math.ceil(Math.random() * 32) + 16, avoid));
 				entities = entities.concat(Generators.Monsters.Generate(Math.ceil(Math.random() * 64) + 32, avoid));
 
+				for(var i in entities)
+				{
+					entities[i].X += 1024 << 4;
+					entities[i].Y += 1024 << 4;
+				}
+
+				player.X += 1024 << 4;
+				player.Y += 1024 << 4;
+
 				world.Zones.Add(entities);
 			}
 			world.Entities.Add(player);
