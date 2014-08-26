@@ -25,6 +25,24 @@ var Menu = [
 	},
 	{
 		Text : 'Export World',
+		Action : function(e) {
+			theX = player.X >> 4 >> 7 << 7 << 4;
+			theY = player.Y >> 4 >> 7 << 7 << 4;
+			//alert(theX + " " + theY);
+			exported = world.Entities.Export((theX+(128<<4)),(theY+(128<<4)),theX,theY);
+                      	//jQuery('#qr').html('').qrcode(exported).show();
+                        jQuery.ajax({
+                      		type: "POST", url: "./world/",
+                                data: {"world":exported},
+                                success: function(x) {
+                                	jQuery('#url').html('<a href="' + x + '">' + x + '</a>');
+                                        jQuery('#qr').html('').qrcode(x);
+                                        jQuery('#share').show();
+                                }, dataType: "text"
+                        });
+
+                },
+
 	},
 	{
 		Text : 'Inventory',
