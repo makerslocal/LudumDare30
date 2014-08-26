@@ -147,8 +147,11 @@
 			//we also should start saving... and I should realy
 			//move these functions into an object some time
 			var SaveToLocalStorage = function() {
-				localStorage["ld30zones.ents"] = world.Entities.Export(2048 <<4, 2048 <<4, 0 <<4, 0 <<4);
-				console.log("Saved to local storage");
+				if ( world.isDirty ) {
+					localStorage["ld30zones.ents"] = world.Entities.Export(2048 <<4, 2048 <<4, 0 <<4, 0 <<4);
+					console.log("Saved to local storage");
+					world.isDirty = false;
+				}
 			};
 			var ConstantlyUpdateSave = function() {
 				SaveToLocalStorage();
