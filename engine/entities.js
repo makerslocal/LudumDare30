@@ -24,6 +24,8 @@ function Entities(world)
 		entity.World = this.World;
 
 		this.Grid.Add(entity);
+
+		this.World.IsDirty = true;
 	};
 
 	this.Contains = function(entity)
@@ -76,6 +78,8 @@ function Entities(world)
 		}
 
 		entity.World = undefined;
+
+		this.World.IsDirty = true;
 	};
 
 	this.Import = function(data) {
@@ -89,17 +93,34 @@ function Entities(world)
 			for ( j=0; j< size; j++ ) {
 				//alert( a[(size*i)+j] );
 				byte = a[(size*i)+j];
-				if ( byte & Enums.Entities.Tree.ID > 0 ) {
-					//alert("Tree");
+				if ( byte === 0x0 ) {
+					continue;
+				} else if ( byte & Enums.Entities.Tree.ID == byte ) {
 					ent = new Tree();
-					ent.X = i << 4;
-					ent.Y = j << 4;
-					ents.push(ent);
-				} else if ( byte === 0x0 ) {
-					//don't do anything
+				} else if ( byte & Enums.Entities.Floor.ID == byte ) {
+                                        ent = new Floor();
+                                } else if ( byte & Enums.Entities.Stone.ID == byte ) {
+                                        ent = new Stone();
+                                } else if ( byte & Enums.Entities.Wood.ID == byte ) {
+                                        ent = new Wood();
+                                } else if ( byte & Enums.Entities.Rock.ID == byte ) {
+                                        ent = new Rock();
+                                } else if ( byte & Enums.Entities.Jelly.ID == byte ) {
+                                        ent = new Jelly();
+                                } else if ( byte & Enums.Entities.Wizard.ID == byte ) {
+                                        ent = new Wizard();
+                                } else if ( byte & Enums.Entities.Snake.ID == byte ) {
+                                        ent = new Snake();
+                                } else if ( byte & Enums.Entities.Arrow.ID == byte ) {
+                                        ent = new Arrow();
 				} else {
 					console.log("What is a " + byte + "?");
 				}
+				if ( ent ) { //we imported something
+					ent.X = i << 4;
+					ent.Y = j << 4;
+					ents.push(ent);
+				} //ahh, ss, push it
 			}
 		}
 
@@ -139,8 +160,23 @@ function Entities(world)
 			var locy = ( included[i].Y >> 4 ) + (tiley/2);
 			
 			if ( included[i] instanceof Tree ) {
-				//alert("Trees here: " + (locx) + "," + (locy) );
 				thebyte = thebyte | Enums.Entities.Tree.ID;
+			} else if ( included[i] instanceof Floor ) {
+				thebyte = thebyte | Enums.Entities.Floor.ID;
+			} else if ( included[i] instanceof Stone ) {
+				thebyte = thebyte | Enums.Entities.Stone.ID;
+			} else if ( included[i] instanceof Wood ) {
+				thebyte = thebyte | Enums.Entities.Wood.ID;
+			} else if ( included[i] instanceof Rock ) {
+				thebyte = thebyte | Enums.Entities.Rock.ID;
+                        } else if ( included[i] instanceof Jelly ) {
+                                thebyte = thebyte | Enums.Entities.Jelly.ID;
+                        } else if ( included[i] instanceof Wizard ) {
+                                thebyte = thebyte | Enums.Entities.Wizard.ID;
+                        } else if ( included[i] instanceof Snake ) {
+                                thebyte = thebyte | Enums.Entities.Snake.ID;
+                        } else if ( included[i] instanceof Arrow ) {
+                                thebyte = thebyte | Enums.Entities.Arrow.ID;
 			}
 
 			//alert(binascii.BinToAscii( [thebyte] ));

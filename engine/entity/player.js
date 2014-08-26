@@ -10,6 +10,8 @@ function Player()
 {
 	Entity.apply(this, arguments);
 
+	var walking = false;
+
 	this.Style.Background.Image = 'sprites.png';
 
 	this.Style.Background.Position.X = 0;
@@ -57,6 +59,8 @@ function Player()
 			}
 		}
 
+		walking = !!(x || y);
+
 		if(this.Scan(x, y))
 		{
 			return;
@@ -85,16 +89,47 @@ function Player()
 			switch(Enums.Directions[this.Direction].ID)
 			{
 				case Enums.Directions.Down.ID:
-					this.Style.Background.Position.X = 0;
+					if(!walking)
+					{
+						this.Style.Background.Position.X = 0;
+					}
+					else
+					{
+						this.Style.Background.Position.X = -(((Engine.Cycles >> 1) % 3) << 4);
+					}
 					break;
+
 				case Enums.Directions.Left.ID:
-					this.Style.Background.Position.X = -128;
+					if(!walking)
+					{
+						this.Style.Background.Position.X = -96;
+					}
+					else
+					{
+						this.Style.Background.Position.X = -((((Engine.Cycles >> 1) % 3) << 4) + 96);
+					}
 					break;
+
 				case Enums.Directions.Right.ID:
-					this.Style.Background.Position.X = -48;
+					if(!walking)
+					{
+						this.Style.Background.Position.X = -48;
+					}
+					else
+					{
+						this.Style.Background.Position.X = -((((Engine.Cycles >> 1) % 3) << 4) + 48);
+					}
 					break;
+
 				case Enums.Directions.Up.ID:
-					this.Style.Background.Position.X = -144;
+					if(!walking)
+					{
+						this.Style.Background.Position.X = -144;
+					}
+					else
+					{
+						this.Style.Background.Position.X = -((((Engine.Cycles >> 1) % 3) << 4) + 144);
+					}
 					break;
 			}
 		}

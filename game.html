@@ -97,16 +97,15 @@
 			var player = Generators.Player.Generate();
 
 			var avoid = new Array();
-			entities.push(player);
+			//entities.push(player);
 
 			var world = new World();
 
 			//maybe let's import local storage?!??!?!?!?!?!??!?!
 			if ( localStorage.getItem("ld30zones.ents") !== null ) {
 				//we have a save in local storage
-				alert("Local storage. " + localStorage["ld30zones.ents"]);
+				world.Zones.Add(world.Entities.Import(localStorage["ld30zones.ents"]));
 			} else {
-				alert("No local storage.");
 				localStorage["ld30zones.ents"] = "butts";
 
 				//generate shit
@@ -120,6 +119,7 @@
 				world.Zones.Add(Generators.Rocks.Generate(Math.ceil(Math.random() * 16384)));
 				world.Zones.Add(Generators.Forest.Generate(Math.ceil(Math.random() * 16384)));
 			}
+			world.Entities.Add(player);
 			//and ya done
 			
 			//oh and we also need a way to reset the game
@@ -128,13 +128,13 @@
 					delete localStorage["ld30zones.ents"];
 					location.reload();
 				}
-				//alert("erased your save.");
 			};
 			
 			//we also should start saving... and I should realy
 			//move these functions into an object some time
 			var SaveToLocalStorage = function() {
 				localStorage["ld30zones.ents"] = world.Entities.Export(2048 <<4, 2048 <<4, 0 <<4, 0 <<4);
+				console.log("Saved to local storage");
 			};
 			var ConstantlyUpdateSave = function() {
 				SaveToLocalStorage();
@@ -160,14 +160,12 @@
 				window.setTimeout(ConstantlyUpdateSave, 5000);
 				
 				document.getElementById("btn-export").onclick = function(e) {
-					//alert(world.Entities.Export(128,128,-64,-64));
 					exported = world.Entities.Export(128<<4,128<<4,0<<4,0<<4);
 					//jQuery('#qr').html('').qrcode(exported).show();
 					jQuery.ajax({ 
 						type: "POST", url: "./world/",
 						data: {"world":exported},
 						success: function(x) {
-							//alert(x);
 							jQuery('#url').html('<a href="' + x + '">' + x + '</a>');
 							jQuery('#qr').html('').qrcode(x);
 							jQuery('#share').show();
@@ -289,12 +287,10 @@
 					<SCRIPT LANGUAGE="javascript" TYPE="text/javascript">
 						/*
 						document.getElementById("menu_mobile").onchange = function () {
-							alert('changed');
 							if (this.selectedIndex > 1) {
 								window.location.href = this.value;
 							}
 							if (this.selectedIndex == 1) {
-								alert('here');
 								window.location.href = this.value;
 							}
 						}
